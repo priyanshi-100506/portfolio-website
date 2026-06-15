@@ -20,9 +20,9 @@ export const siteConfig = {
   title: "Priyanshi Shah | AI/ML Engineer & Strategy Builder",
   description:
     "Premium portfolio for Priyanshi Shah, a Computer Science & Business Systems student specializing in applied AI/ML, predictive modeling, and scalable software systems.",
-  email: "priyanshi.shah@example.com",
-  linkedin: "https://www.linkedin.com/in/priyanshi-shah",
-  github: "https://github.com/priyanshi-shah",
+  email: "priyanshicshah@gmail.com",
+  linkedin: "https://www.linkedin.com/in/priyanshi-chirag-shah-26a759319/",
+  github: "https://github.com/priyanshi-100506",
   resume: "/resume/Priyanshi-Shah-Resume.md"
 };
 
@@ -137,12 +137,12 @@ export const skillGroups = [
 
 export const contactLinks = [
   { label: "Email", href: `mailto:${siteConfig.email}`, value: siteConfig.email, icon: Mail },
-  { label: "LinkedIn", href: siteConfig.linkedin, value: "linkedin.com/in/priyanshi-shah", icon: Link2 },
-  { label: "GitHub", href: siteConfig.github, value: "github.com/priyanshi-shah", icon: GitBranch }
+  { label: "LinkedIn", href: siteConfig.linkedin, value: "https://www.linkedin.com/in/priyanshi-chirag-shah-26a759319/", icon: Link2 },
+  { label: "GitHub", href: siteConfig.github, value: "https://github.com/priyanshi-100506", icon: GitBranch }
 ];
 
 export const aboutHighlights = [
-  "Computer Science & Business Systems student at PDEU with a 9.19 CGPA.",
+  "Computer Science & Business Systems student at PDEU with a 9.17 CGPA.",
   "Focused on production-ready AI systems that combine modeling depth with dependable engineering.",
   "Founder and Strategy Lead of SCOPE, leading 50+ members through execution-oriented initiatives.",
   "Contributor with Vidhyadaan NGO, aligning technical capability with social impact.",
@@ -151,6 +151,6 @@ export const aboutHighlights = [
 
 export const experiencePillars = [
   { label: "Institution", value: "PDEU", icon: Building2 },
-  { label: "Academic Index", value: "9.19 CGPA", icon: GraduationCap },
+  { label: "Academic Index", value: "9.17 CGPA", icon: GraduationCap },
   { label: "Leadership", value: "Founder & Strategy Lead, SCOPE", icon: Users }
 ];
