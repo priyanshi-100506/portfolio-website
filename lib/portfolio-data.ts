@@ -23,7 +23,7 @@ export const siteConfig = {
   email: "priyanshicshah@gmail.com",
   linkedin: "https://www.linkedin.com/in/priyanshi-chirag-shah-26a759319/",
   github: "https://github.com/priyanshi-100506",
-  resume: "/resume/Priyanshi-Shah-Resume.md"
+  resume: "/resume/priyanshi_shah_resume.pdf" // Updated extension from .md to .pdf for cleaner downloads
 };
 
 export const navItems = [
@@ -64,7 +64,7 @@ export const capabilities = [
 ];
 
 export const metrics = [
-  { value: "9.19", label: "CGPA", icon: GraduationCap },
+  { value: "9.17", label: "CGPA", icon: GraduationCap }, // Corrected from 9.19 to 9.17 to match your 3rd-year index
   { value: "15,000+", label: "SQL tuples optimized", icon: DatabaseZap },
   { value: "50+", label: "members led through SCOPE", icon: Users },
   { value: "48-hour", label: "prototype delivery", icon: Rocket }
@@ -137,12 +137,12 @@ export const skillGroups = [
 
 export const contactLinks = [
   { label: "Email", href: `mailto:${siteConfig.email}`, value: siteConfig.email, icon: Mail },
-  { label: "LinkedIn", href: siteConfig.linkedin, value: "https://www.linkedin.com/in/priyanshi-chirag-shah-26a759319/", icon: Link2 },
-  { label: "GitHub", href: siteConfig.github, value: "https://github.com/priyanshi-100506", icon: GitBranch }
+  { label: "LinkedIn", href: siteConfig.linkedin, value: "linkedin.com/in/priyanshi-chirag-shah-26a759319", icon: Link2 }, // Made values cleaner for UI layout display
+  { label: "GitHub", href: siteConfig.github, value: "github.com/priyanshi-100506", icon: GitBranch }
 ];
 
 export const aboutHighlights = [
-  "Computer Science & Business Systems student at PDEU with a 9.17 CGPA.",
+  "Computer Science & Business Systems student at PDEU with a 9.17 CGPA.", // Confirmed 9.17
   "Focused on production-ready AI systems that combine modeling depth with dependable engineering.",
   "Founder and Strategy Lead of SCOPE, leading 50+ members through execution-oriented initiatives.",
   "Contributor with Vidhyadaan NGO, aligning technical capability with social impact.",
@@ -151,6 +151,6 @@ export const aboutHighlights = [
 
 export const experiencePillars = [
   { label: "Institution", value: "PDEU", icon: Building2 },
-  { label: "Academic Index", value: "9.17 CGPA", icon: GraduationCap },
+  { label: "Academic Index", value: "9.17 CGPA", icon: GraduationCap }, // Confirmed 9.17
   { label: "Leadership", value: "Founder & Strategy Lead, SCOPE", icon: Users }
 ];
