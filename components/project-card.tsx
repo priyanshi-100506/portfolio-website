@@ -1,5 +1,6 @@
 import { ArrowUpRight, GitBranch, ExternalLink } from "lucide-react";
 import { Reveal } from "@/components/reveal";
+import { SilkFlower } from "@/components/silk-flower";
 
 type ProjectCardProps = {
   project: {
@@ -19,15 +20,20 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
   return (
     <Reveal
       as="article"
-      className="group relative overflow-hidden rounded-lg border border-line bg-panel/70 p-6 shadow-glow transition duration-300 hover:-translate-y-1 hover:border-cyan/50 sm:p-8"
+      className="group relative overflow-hidden rounded-2xl border border-line bg-panel/70 p-6 shadow-glow transition duration-500 hover:-translate-y-1.5 hover:border-rose/60 sm:p-8"
       delay={index * 0.06}
     >
-      <div className="absolute right-0 top-0 h-32 w-32 bg-cyan/10 blur-3xl transition group-hover:bg-iris/20" />
+      <div className="absolute -right-8 -top-8 h-44 w-44 text-rose/10 transition-transform duration-700 group-hover:rotate-45 group-hover:scale-125 pointer-events-none">
+        <SilkFlower size={176} className="text-rose/15" />
+      </div>
       <div className="relative">
         <div className="mb-8 flex items-start justify-between gap-6">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brass">Project 0{index + 1}</p>
-            <h2 className="mt-3 font-display text-2xl font-semibold text-pearl sm:text-3xl">{project.title}</h2>
+            <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-blush">
+              <SilkFlower className="h-3.5 w-3.5 text-rose" />
+              Project 0{index + 1}
+            </p>
+            <h2 className="mt-3 font-display text-2xl font-normal italic text-pearl sm:text-3xl">{project.title}</h2>
           </div>
           <div className="mt-1 flex items-center gap-3">
             {project.github && (

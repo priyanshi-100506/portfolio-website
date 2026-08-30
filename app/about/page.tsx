@@ -4,6 +4,7 @@ import { Container } from "@/components/container";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { aboutHighlights, experiencePillars, skillGroups } from "@/lib/portfolio-data";
+import { SilkFlower } from "@/components/silk-flower";
 
 export const metadata: Metadata = {
   title: "About",
@@ -23,25 +24,33 @@ export default function AboutPage() {
         </Reveal>
 
         <section className="mt-14 grid gap-8 lg:grid-cols-[0.9fr_1.4fr]">
-          <Reveal className="rounded-lg border border-line bg-panel/70 p-6 sm:p-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-cyan">Profile</p>
-            <h2 className="mt-6 font-display text-3xl font-semibold leading-tight text-pearl">
-              Production-ready AI is where research quality meets delivery discipline.
-            </h2>
-            <p className="mt-5 leading-8 text-mist">
-              Her work centers on building intelligent systems that can be understood, shipped, measured, and improved.
-            </p>
+          <Reveal className="relative overflow-hidden rounded-2xl border border-line bg-panel/70 p-6 sm:p-8">
+            <div className="absolute -right-8 -top-8 h-40 w-40 text-rose/10 pointer-events-none">
+              <SilkFlower size={160} className="text-rose/15" />
+            </div>
+            <div className="relative">
+              <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-blush">
+                <SilkFlower className="h-3.5 w-3.5 text-rose" />
+                Profile
+              </p>
+              <h2 className="mt-6 font-display text-3xl font-normal italic leading-tight text-pearl">
+                Production-ready AI is where research quality meets delivery discipline.
+              </h2>
+              <p className="mt-5 leading-8 text-mist font-light">
+                Her work centers on building intelligent systems that can be understood, shipped, measured, and improved.
+              </p>
+            </div>
           </Reveal>
 
           <div className="grid gap-4">
             {aboutHighlights.map((highlight, index) => (
               <Reveal
-                className="flex gap-4 rounded-lg border border-line bg-white/[0.04] p-5"
+                className="flex gap-4 rounded-xl border border-line bg-white/[0.03] p-5 transition duration-300 hover:border-rose/40 hover:bg-white/[0.05]"
                 delay={index * 0.05}
                 key={highlight}
               >
-                <CheckCircle2 aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-signal" />
-                <p className="leading-7 text-mist">{highlight}</p>
+                <CheckCircle2 aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-blush" />
+                <p className="leading-7 text-mist font-light">{highlight}</p>
               </Reveal>
             ))}
           </div>
@@ -51,10 +60,13 @@ export default function AboutPage() {
           {experiencePillars.map((pillar, index) => {
             const Icon = pillar.icon;
             return (
-              <Reveal as="article" className="rounded-lg border border-line bg-panel/70 p-6" delay={index * 0.05} key={pillar.label}>
-                <Icon aria-hidden="true" className="h-7 w-7 text-brass" />
-                <p className="mt-8 text-xs font-semibold uppercase tracking-[0.22em] text-mist">{pillar.label}</p>
-                <h2 className="mt-3 font-display text-2xl font-semibold text-pearl">{pillar.value}</h2>
+              <Reveal as="article" className="group relative overflow-hidden rounded-2xl border border-line bg-panel/70 p-6 transition duration-500 hover:-translate-y-1 hover:border-rose/40" delay={index * 0.05} key={pillar.label}>
+                <div className="flex items-center justify-between">
+                  <Icon aria-hidden="true" className="h-6 w-6 text-blush" />
+                  <SilkFlower className="h-4 w-4 text-rose/30 group-hover:rotate-45 transition-transform duration-500" />
+                </div>
+                <p className="mt-8 text-xs font-semibold uppercase tracking-[0.22em] text-mist/90">{pillar.label}</p>
+                <h2 className="mt-3 font-display text-2xl font-normal italic text-pearl">{pillar.value}</h2>
               </Reveal>
             );
           })}
@@ -72,13 +84,16 @@ export default function AboutPage() {
             {skillGroups.map((group, index) => {
               const Icon = group.icon;
               return (
-                <Reveal as="article" className="rounded-lg border border-line bg-white/[0.04] p-6" delay={index * 0.08} key={group.title}>
-                  <Icon aria-hidden="true" className="h-8 w-8 text-cyan" />
-                  <h2 className="mt-7 font-display text-2xl font-semibold text-pearl">{group.title}</h2>
+                <Reveal as="article" className="group relative overflow-hidden rounded-2xl border border-line bg-white/[0.035] p-6 transition duration-500 hover:-translate-y-1.5 hover:border-rose/50 hover:bg-white/[0.05]" delay={index * 0.08} key={group.title}>
+                  <div className="flex items-center justify-between">
+                    <Icon aria-hidden="true" className="h-7 w-7 text-blush" />
+                    <SilkFlower className="h-4 w-4 text-rose/30 group-hover:rotate-90 transition-transform duration-500" />
+                  </div>
+                  <h2 className="mt-7 font-display text-2xl font-normal italic text-pearl">{group.title}</h2>
                   <ul className="mt-6 space-y-3">
                     {group.skills.map((skill) => (
-                      <li className="flex items-center gap-3 text-mist" key={skill}>
-                        <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brass" />
+                      <li className="flex items-center gap-3 text-mist font-light" key={skill}>
+                        <SilkFlower className="h-3 w-3 text-rose/80" />
                         {skill}
                       </li>
                     ))}

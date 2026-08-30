@@ -6,6 +6,7 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { clsx } from "clsx";
 import { navItems, siteConfig } from "@/lib/portfolio-data";
+import { SilkFlower } from "@/components/silk-flower";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -20,7 +21,8 @@ export function SiteHeader() {
         Skip to content
       </a>
       <nav aria-label="Primary navigation" className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10">
-        <Link className="font-display text-sm font-semibold uppercase tracking-[0.22em] text-pearl" href="/">
+        <Link className="group inline-flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-[0.22em] text-pearl" href="/">
+          <SilkFlower className="h-5 w-5 text-rose transition-transform duration-500 group-hover:rotate-45 group-hover:scale-110" />
           {siteConfig.name}
         </Link>
 

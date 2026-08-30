@@ -74,13 +74,16 @@ export default function HomePage() {
             return (
               <Reveal
                 as="article"
-                className="rounded-lg border border-line bg-white/[0.045] p-6 transition duration-300 hover:-translate-y-1 hover:border-cyan/50 hover:bg-white/[0.065]"
+                className="group relative overflow-hidden rounded-2xl border border-line bg-white/[0.035] p-6 transition duration-500 hover:-translate-y-1.5 hover:border-rose/50 hover:bg-white/[0.05]"
                 delay={index * 0.08}
                 key={capability.title}
               >
-                <Icon aria-hidden="true" className="h-8 w-8 text-cyan" />
-                <h3 className="mt-8 font-display text-2xl font-semibold text-pearl">{capability.title}</h3>
-                <p className="mt-4 leading-7 text-mist">{capability.description}</p>
+                <div className="flex items-center justify-between">
+                  <Icon aria-hidden="true" className="h-7 w-7 text-blush" />
+                  <SilkFlower className="h-4 w-4 text-rose/30 transition-transform duration-500 group-hover:rotate-90 group-hover:text-rose/80" />
+                </div>
+                <h3 className="mt-8 font-display text-2xl font-normal italic text-pearl">{capability.title}</h3>
+                <p className="mt-4 leading-7 text-mist font-light">{capability.description}</p>
               </Reveal>
             );
           })}
@@ -94,13 +97,16 @@ export default function HomePage() {
             return (
               <Reveal
                 as="article"
-                className="rounded-lg border border-line bg-panel/70 p-6"
+                className="group relative overflow-hidden rounded-2xl border border-line bg-panel/70 p-6 transition duration-500 hover:-translate-y-1 hover:border-rose/40"
                 delay={index * 0.06}
                 key={metric.label}
               >
-                <Icon aria-hidden="true" className="h-6 w-6 text-brass" />
-                <p className="mt-8 font-display text-4xl font-semibold text-pearl">{metric.value}</p>
-                <p className="mt-3 text-sm uppercase tracking-[0.18em] text-mist">{metric.label}</p>
+                <div className="flex items-center justify-between">
+                  <Icon aria-hidden="true" className="h-6 w-6 text-blush" />
+                  <SilkFlower className="h-3.5 w-3.5 text-rose/30 group-hover:rotate-45 transition-transform duration-500" />
+                </div>
+                <p className="mt-8 font-display text-4xl font-normal italic text-pearl">{metric.value}</p>
+                <p className="mt-3 text-xs uppercase tracking-[0.2em] text-mist/90">{metric.label}</p>
               </Reveal>
             );
           })}
@@ -108,12 +114,12 @@ export default function HomePage() {
       </Container>
 
       <Container as="section" className="py-20">
-        <div className="grid gap-6 border-y border-line py-14 md:grid-cols-[1fr_1.4fr] md:items-center">
-          <div className="flex gap-3 text-cyan">
-            <Layers3 aria-hidden="true" className="h-7 w-7" />
-            <Eye aria-hidden="true" className="h-7 w-7" />
+        <div className="relative overflow-hidden rounded-3xl border border-line bg-panel/50 p-8 sm:p-12 md:grid md:grid-cols-[1fr_1.4fr] md:items-center">
+          <div className="flex items-center gap-4 text-blush">
+            <SilkFlower size={36} className="text-rose animate-spin-slow" />
+            <span className="text-sm font-semibold uppercase tracking-[0.24em] text-mist">Engineering & Artistry</span>
           </div>
-          <p className="text-balance font-display text-2xl font-semibold leading-tight text-pearl sm:text-3xl">
+          <p className="mt-6 md:mt-0 text-balance font-display text-2xl font-normal italic leading-relaxed text-pearl sm:text-3xl">
             Built for work that needs both technical precision and strategic clarity.
           </p>
         </div>
