@@ -72,48 +72,42 @@ export const metrics = [
 
 export const projects = [
   {
-    title: "ShelfPulse AI",
-    tagline: "Retail intelligence from real-time shelf perception.",
+    title: "ATHENA",
+    tagline: "Architectural Analysis Engine for Python Repos — understand any codebase before you touch it.",
     problem:
-      "Retail teams lose margin and customer trust when inventory gaps, product displacement, and aisle behavior stay invisible until after the sale is missed.",
+      "Navigating unfamiliar Python codebases is slow and risky: hidden circular dependencies, dead code, and unmeasured coupling silently accumulate until a refactor breaks something.",
     solution:
-      "A YOLOv8-based vision platform tracks shelf availability, movement patterns, and customer interaction signals so operators can intervene faster.",
-    technologies: ["YOLOv8", "Python", "OpenCV", "Analytics", "Computer Vision"],
+      "A static-analysis tool that parses Python repos via ASTs to construct module-level dependency graphs and symbol-level call graphs. Detects circular dependencies and dead code, computes coupling and instability metrics, and surfaces AI-assisted refactoring suggestions via Gemini 2.5 Flash through a FastAPI + Next.js/React/Tailwind frontend.",
+    technologies: ["Python", "FastAPI", "Next.js", "React", "Tailwind", "Gemini", "AST Analysis"],
     outcome:
-      "Transforms store footage into actionable inventory and customer analytics for faster replenishment decisions."
+      "Quantifies architectural impact before changes are made — giving engineers a reliable map of any codebase rather than guesswork.",
+    liveDemo: "https://athena-eta-puce.vercel.app/"
   },
   {
-    title: "EduNotes AI",
-    tagline: "A RAG assistant for learning material that actually answers in context.",
+    title: "METIS",
+    tagline: "AI Research Intelligence Platform — real-time arXiv ingestion with AI-powered curation.",
     problem:
-      "Students need fast retrieval from dense lectures and notes, but generic search often misses semantic meaning and source grounding.",
+      "Researchers drown in paper volume. Manually tracking arXiv for relevant work across rapidly moving fields is unsustainable without automation and smart filtering.",
     solution:
-      "A retrieval-augmented assistant uses Whisper transcription, embeddings, vector databases, and semantic search to surface precise explanations.",
-    technologies: ["RAG", "Whisper", "Vector DB", "Semantic Search", "LLM"],
+      "A deployed, real-time backend platform (FastAPI + PostgreSQL + SQLAlchemy Async + AsyncPG) that continuously ingests arXiv papers, deduplicates and validates them with Pydantic, and streams AI-powered summaries (Gemini) to a React dashboard via Server-Sent Events. Containerized with Docker/Docker Compose and automated with GitHub Actions CI/CD.",
+    technologies: ["Python", "FastAPI", "PostgreSQL", "Gemini", "Docker", "GitHub Actions", "Pytest", "SSE"],
     outcome:
-      "Shortens the path from lecture content to study-ready answers while preserving source relevance."
+      "Production-ready research pipeline that surfaces curated, summarized findings in real time — owned end-to-end from ingestion correctness to CI/CD reliability.",
+    liveDemo: "https://metis-ashen-seven.vercel.app/",
+    github: "https://github.com/priyanshi-100506/metis"
   },
   {
-    title: "PDAC Risk Engine",
-    tagline: "Interpretable deep learning for predictive healthcare analytics.",
+    title: "DOXA",
+    tagline: "Event-Sourced Decision Ledger — immutable, time-travellable technical decision records.",
     problem:
-      "High-risk healthcare prediction needs accuracy, but clinical stakeholders also need transparent signals behind model behavior.",
+      "Engineering teams lose context on why decisions were made. In-place mutation of records destroys history, making audits and rollbacks unreliable.",
     solution:
-      "A 1D-CNN framework evaluates risk patterns and uses SHAP interpretability to make model drivers inspectable.",
-    technologies: ["1D-CNN", "Deep Learning", "SHAP", "Healthcare AI", "Python"],
+      "An event-sourced system modeling technical decisions as immutable, append-only event logs with state derived via deterministic replay. Enforces graph invariants (blocking self-loops, invalid transitions, mutations to resolved decisions) and supports version time-travel with structural graph diffing across historical versions. 100% deterministic — zero LLM dependency in the core engine.",
+    technologies: ["Python", "FastAPI", "SQLAlchemy", "React", "TypeScript", "Vite", "Event Sourcing"],
     outcome:
-      "Pairs predictive modeling with explainability so risk outputs are more trustworthy and decision-ready."
-  },
-  {
-    title: "EstatePro Platform",
-    tagline: "A normalized property platform with production-minded data architecture.",
-    problem:
-      "Property workflows become slow and inconsistent when listings, users, transactions, and search filters live in fragmented data structures.",
-    solution:
-      "A full-stack platform built with Next.js, Node.js, and a normalized SQL database containing 15,000+ tuples.",
-    technologies: ["Next.js", "Node.js", "SQL", "TypeScript", "Database Design"],
-    outcome:
-      "Improves data integrity, query structure, and operational readiness for property discovery workflows."
+      "A principled decision-tracking system where history is permanent, state is always reproducible, and every past version can be structurally compared.",
+    liveDemo: "https://doxa-gules.vercel.app/",
+    github: "https://github.com/priyanshi-100506/doxa"
   }
 ];
 

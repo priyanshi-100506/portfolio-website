@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
 type ProjectCardProps = {
@@ -9,6 +9,8 @@ type ProjectCardProps = {
     solution: string;
     technologies: string[];
     outcome: string;
+    github?: string;
+    liveDemo?: string;
   };
   index: number;
 };
@@ -27,7 +29,31 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brass">Project 0{index + 1}</p>
             <h2 className="mt-3 font-display text-2xl font-semibold text-pearl sm:text-3xl">{project.title}</h2>
           </div>
-          <ArrowUpRight aria-hidden="true" className="mt-1 h-5 w-5 text-cyan transition group-hover:-translate-y-1 group-hover:translate-x-1" />
+          <div className="mt-1 flex items-center gap-3">
+            {project.github && (
+              <a
+                aria-label={`${project.title} GitHub repository`}
+                className="text-mist transition hover:text-pearl"
+                href={project.github}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <Github className="h-5 w-5" />
+              </a>
+            )}
+            {project.liveDemo && (
+              <a
+                aria-label={`${project.title} live demo`}
+                className="text-mist transition hover:text-cyan"
+                href={project.liveDemo}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <ExternalLink className="h-5 w-5" />
+              </a>
+            )}
+            <ArrowUpRight aria-hidden="true" className="h-5 w-5 text-cyan transition group-hover:-translate-y-1 group-hover:translate-x-1" />
+          </div>
         </div>
         <p className="text-lg leading-8 text-pearl">{project.tagline}</p>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
@@ -48,6 +74,32 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           ))}
         </div>
         <p className="mt-8 border-t border-line pt-5 text-sm font-medium leading-7 text-signal">{project.outcome}</p>
+        {(project.liveDemo || project.github) && (
+          <div className="mt-6 flex flex-wrap gap-3">
+            {project.liveDemo && (
+              <a
+                className="inline-flex items-center gap-1.5 rounded-full border border-cyan/40 bg-cyan/[0.08] px-4 py-1.5 text-xs font-semibold text-cyan transition hover:bg-cyan/20"
+                href={project.liveDemo}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <ExternalLink className="h-3 w-3" />
+                Live Demo
+              </a>
+            )}
+            {project.github && (
+              <a
+                className="inline-flex items-center gap-1.5 rounded-full border border-line bg-white/[0.04] px-4 py-1.5 text-xs font-semibold text-mist transition hover:border-pearl/40 hover:text-pearl"
+                href={project.github}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <Github className="h-3 w-3" />
+                GitHub
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </Reveal>
   );
