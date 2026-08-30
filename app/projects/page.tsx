@@ -7,7 +7,7 @@ import { projects } from "@/lib/portfolio-data";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "AI, data, and software engineering projects by Priyanshi Shah."
+  description: "Backend systems and applied AI projects by Priyanshi Shah."
 };
 
 export default function ProjectsPage() {
@@ -17,8 +17,8 @@ export default function ProjectsPage() {
         <Reveal>
           <SectionHeading
             eyebrow="Projects"
-            title="Impact-focused systems across AI, data, and product engineering."
-            copy="Each project is designed around a measurable problem, a production-minded solution, and outcomes that improve decision quality."
+            title="Backend systems and applied AI, built and shipped end to end."
+            copy="Each project is a real, deployed system — not a notebook or a demo. Built with the same testing and reliability discipline whether or not AI is in the loop."
           />
         </Reveal>
         <div className="mt-14 grid gap-6">

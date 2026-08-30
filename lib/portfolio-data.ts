@@ -1,29 +1,31 @@
 import {
   Blocks,
-  BrainCircuit,
+  Bot,
   Building2,
   Cpu,
   DatabaseZap,
-  Eye,
   GitBranch,
   GraduationCap,
+  HeartHandshake,
+  Layers,
   Link2,
   Mail,
   Network,
   Rocket,
+  Server,
   Sparkles,
-  Users
+  Terminal
 } from "lucide-react";
 
 export const siteConfig = {
   name: "Priyanshi Shah",
-  title: "Priyanshi Shah | AI/ML Engineer & Strategy Builder",
+  title: "Priyanshi Shah | Backend Engineer & Applied AI Builder",
   description:
-    "Premium portfolio for Priyanshi Shah, a Computer Science & Business Systems student specializing in applied AI/ML, predictive modeling, and scalable software systems.",
+    "Portfolio of Priyanshi Shah, a Computer Science & Business Systems student building reliable backend systems and applied AI features — REST APIs, async Python, and LLM/RAG integrations that ship.",
   email: "priyanshicshah@gmail.com",
-  linkedin: "https://www.linkedin.com/in/priyanshi-chirag-shah-26a759319/",
+  linkedin: "https://linkedin.com/in/priyanshi-shah-26a759319",
   github: "https://github.com/priyanshi-100506",
-  resume: "/resume/priyanshi_shah_resume.pdf" // Updated extension from .md to .pdf for cleaner downloads
+  resume: "/resume/priyanshi_shah_resume.pdf"
 };
 
 export const navItems = [
@@ -34,40 +36,39 @@ export const navItems = [
 ];
 
 export const tickerItems = [
-  "Applied Machine Learning",
-  "Computer Vision",
-  "Agentic AI",
-  "Predictive Data Pipelines",
-  "Strategic Execution",
-  "Platform Engineering"
+  "Backend Systems",
+  "REST API Design",
+  "Async Python",
+  "LLM & RAG Integration",
+  "CI/CD & Deployment",
+  "Distributed Systems"
 ];
 
 export const capabilities = [
   {
-    title: "Applied Machine Learning",
+    title: "Backend Engineering",
     description:
-      "Modeling workflows that move from exploratory notebooks to reliable, measurable systems.",
-    icon: BrainCircuit
+      "Async FastAPI services, PostgreSQL data layers, and REST APIs designed for reliability and tested end-to-end.",
+    icon: Server
   },
   {
-    title: "Computer Vision",
+    title: "Applied AI & LLM Integration",
     description:
-      "Real-time perception systems for retail intelligence, inventory state, and operational analytics.",
-    icon: Eye
+      "Retrieval-augmented generation, LLM API integration (Gemini, Ollama), and AI-assisted features built with the same correctness bar as hand-written code.",
+    icon: Bot
   },
   {
-    title: "Platform Engineering",
+    title: "Systems & DevOps",
     description:
-      "Full-stack foundations, clean data models, and delivery patterns built for scale.",
-    icon: Blocks
+      "Docker, CI/CD via GitHub Actions, and deployment pipelines that turn a working prototype into a shipped, monitored system.",
+    icon: Terminal
   }
 ];
 
 export const metrics = [
-  { value: "9.17", label: "CGPA", icon: GraduationCap }, // Corrected from 9.19 to 9.17 to match your 3rd-year index
-  { value: "15,000+", label: "SQL tuples optimized", icon: DatabaseZap },
-  { value: "50+", label: "members led through SCOPE", icon: Users },
-  { value: "48-hour", label: "prototype delivery", icon: Rocket }
+  { value: "9.17", label: "CGPA", subtext: "PDEU CSBS Undergraduate Index", icon: GraduationCap },
+  { value: "15,000+", label: "SQL tuples optimized", subtext: "Query optimization in DBMS project", icon: DatabaseZap },
+  { value: "48-hour", label: "prototype delivery", subtext: "Hackathon prototype to working demo", icon: Rocket }
 ];
 
 export const projects = [
@@ -105,7 +106,7 @@ export const projects = [
       "An event-sourced system modeling technical decisions as immutable, append-only event logs with state derived via deterministic replay. Enforces graph invariants (blocking self-loops, invalid transitions, mutations to resolved decisions) and supports version time-travel with structural graph diffing across historical versions. 100% deterministic — zero LLM dependency in the core engine.",
     technologies: ["Python", "FastAPI", "SQLAlchemy", "React", "TypeScript", "Vite", "Event Sourcing"],
     outcome:
-      "A principled decision-tracking system where history is permanent, state is always reproducible, and every past version can be structurally compared.",
+      "A principled decision-tracking system where history is permanent, state is always reproducible, and every past version can be structurally compared — demonstrating that not every problem needs an LLM to be solved well.",
     liveDemo: "https://doxa-gules.vercel.app/",
     github: "https://github.com/priyanshi-100506/doxa"
   }
@@ -113,38 +114,63 @@ export const projects = [
 
 export const skillGroups = [
   {
-    title: "AI & Deep Learning",
-    skills: ["Machine Learning", "Deep Learning", "Computer Vision", "RAG Systems", "SHAP", "Predictive Modeling"],
+    title: "Backend & APIs",
+    skills: [
+      "FastAPI",
+      "AsyncIO / Async Python",
+      "PostgreSQL / SQLAlchemy / AsyncPG",
+      "REST API Design",
+      "Third-party & Service Integration"
+    ],
+    icon: Server
+  },
+  {
+    title: "Applied AI",
+    skills: [
+      "Retrieval-Augmented Generation (RAG)",
+      "Gemini API",
+      "Ollama",
+      "Pydantic (Structured LLM Output)"
+    ],
+    icon: Bot
+  },
+  {
+    title: "Systems & DevOps",
+    skills: [
+      "Docker / Docker Compose",
+      "GitHub Actions / CI-CD",
+      "Linux/Unix Tooling",
+      "Pytest (Unit / Integration / E2E)"
+    ],
+    icon: Terminal
+  },
+  {
+    title: "Also Worked With",
+    skills: [
+      "Deep Learning",
+      "Computer Vision (OpenCV, YOLO)",
+      "SHAP / Model Interpretability"
+    ],
     icon: Sparkles
-  },
-  {
-    title: "Software Engineering",
-    skills: ["Next.js", "TypeScript", "Node.js", "SQL", "API Design", "Data Pipelines"],
-    icon: Cpu
-  },
-  {
-    title: "Strategy & Cloud",
-    skills: ["Strategic Execution", "Team Leadership", "Cloud Foundations", "Product Thinking", "Stakeholder Communication"],
-    icon: Network
   }
 ];
 
 export const contactLinks = [
   { label: "Email", href: `mailto:${siteConfig.email}`, value: siteConfig.email, icon: Mail },
-  { label: "LinkedIn", href: siteConfig.linkedin, value: "linkedin.com/in/priyanshi-chirag-shah-26a759319", icon: Link2 }, // Made values cleaner for UI layout display
+  { label: "LinkedIn", href: siteConfig.linkedin, value: "linkedin.com/in/priyanshi-shah-26a759319", icon: Link2 },
   { label: "GitHub", href: siteConfig.github, value: "github.com/priyanshi-100506", icon: GitBranch }
 ];
 
 export const aboutHighlights = [
-  "Computer Science & Business Systems student at PDEU with a 9.17 CGPA.", // Confirmed 9.17
-  "Focused on production-ready AI systems that combine modeling depth with dependable engineering.",
-  "Founder and Strategy Lead of SCOPE, leading 50+ members through execution-oriented initiatives.",
-  "Contributor with Vidhyadaan NGO, aligning technical capability with social impact.",
-  "Bridges engineering execution with business strategy to build systems that serve measurable decisions."
+  "Computer Science & Business Systems student at PDEU with a 9.17 CGPA.",
+  "Builds backend services and REST APIs with FastAPI, PostgreSQL, and async Python — treated as production systems, not scripts.",
+  "Co-Founder & Testing Engineer at Pegasus Lab, building automated test suites that hold AI-generated code to the same quality bar as hand-written code.",
+  "Integrates LLM APIs (Gemini, Ollama) and RAG techniques into real backend pipelines — using AI to accelerate engineering, not replace judgment.",
+  "Digital Strategy Volunteer with Vidhyadaan Foundation, supporting outreach and fundraising for educational initiatives."
 ];
 
 export const experiencePillars = [
-  { label: "Institution", value: "PDEU", icon: Building2 },
-  { label: "Academic Index", value: "9.17 CGPA", icon: GraduationCap }, // Confirmed 9.17
-  { label: "Leadership", value: "Founder & Strategy Lead, SCOPE", icon: Users }
+  { label: "Institution", value: "Pandit Deendayal Energy University (PDEU)", icon: Building2 },
+  { label: "Academic Index", value: "9.17 CGPA", icon: GraduationCap },
+  { label: "Role", value: "Co-Founder & Testing Engineer, Pegasus Lab", icon: Rocket }
 ];

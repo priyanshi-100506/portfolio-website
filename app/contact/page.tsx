@@ -8,7 +8,7 @@ import { SilkFlower } from "@/components/silk-flower";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Contact Priyanshi Shah for AI/ML internships, engineering opportunities, and collaborations."
+  description: "Contact Priyanshi Shah for backend engineering and applied AI internships, opportunities, and collaborations."
 };
 
 export default function ContactPage() {
@@ -22,10 +22,11 @@ export default function ContactPage() {
               Contact
             </p>
             <h1 className="font-display text-5xl font-normal italic leading-none text-pearl sm:text-7xl lg:text-8xl">
-              Initiate <span className="not-italic font-semibold">Innovation.</span>
+              Let&apos;s build <br className="hidden sm:inline" />
+              <span className="not-italic font-semibold">something reliable.</span>
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-mist sm:text-xl font-light">
-              Currently seeking AI/ML internships, engineering opportunities, and impactful collaborations.
+              Currently seeking Backend Engineering and Applied AI internships — building systems that combine solid engineering with practical AI integration.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href={siteConfig.resume} download ariaLabel="Download Priyanshi Shah resume">

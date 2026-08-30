@@ -8,7 +8,7 @@ import { SilkFlower } from "@/components/silk-flower";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "About Priyanshi Shah: AI/ML engineering, software systems, leadership, and strategy."
+  description: "About Priyanshi Shah: Backend engineering, applied AI, automated testing, and systems discipline."
 };
 
 export default function AboutPage() {
@@ -18,8 +18,8 @@ export default function AboutPage() {
         <Reveal>
           <SectionHeading
             eyebrow="About"
-            title="An engineering mind with a strategy operator's discipline."
-            copy="Priyanshi Shah bridges applied intelligence, scalable software, and business execution."
+            title="An engineer who ships — backend systems first, AI where it earns its place."
+            copy="Priyanshi Shah builds backend services and applied AI features, with an emphasis on reliability, testing, and production discipline."
           />
         </Reveal>
 
@@ -34,10 +34,10 @@ export default function AboutPage() {
                 Profile
               </p>
               <h2 className="mt-6 font-display text-3xl font-normal italic leading-tight text-pearl">
-                Production-ready AI is where research quality meets delivery discipline.
+                Good AI features sit on top of good backends — not instead of them.
               </h2>
               <p className="mt-5 leading-8 text-mist font-light">
-                Her work centers on building intelligent systems that can be understood, shipped, measured, and improved.
+                Her work centers on systems that are tested, deployable, and understandable — whether or not an LLM is part of the pipeline.
               </p>
             </div>
           </Reveal>
@@ -76,11 +76,11 @@ export default function AboutPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Skills"
-              title="A focused stack for intelligent products."
-              copy="Categorized capabilities across modeling, engineering, and execution."
+              title="A focused stack for reliable systems."
+              copy="Categorized capabilities across backend services, applied AI integration, and systems tooling."
             />
           </Reveal>
-          <div className="mt-12 grid gap-4 lg:grid-cols-3">
+          <div className="mt-12 grid gap-4 lg:grid-cols-4">
             {skillGroups.map((group, index) => {
               const Icon = group.icon;
               return (

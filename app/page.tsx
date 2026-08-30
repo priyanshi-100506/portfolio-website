@@ -1,10 +1,11 @@
-import { ArrowDown, Sparkles, Heart, Eye, Layers3 } from "lucide-react";
+import { ArrowDown, Sparkles, Heart, Server, Bot, Terminal, ShieldCheck } from "lucide-react";
 import { AnimatedTicker } from "@/components/animated-ticker";
 import { ButtonLink } from "@/components/button-link";
 import { Container } from "@/components/container";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { capabilities, metrics } from "@/lib/portfolio-data";
+import { SilkFlower } from "@/components/silk-flower";
 
 export default function HomePage() {
   return (
@@ -27,15 +28,14 @@ export default function HomePage() {
           <Reveal className="max-w-5xl">
             <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-rose/30 bg-rose/[0.08] px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-blush backdrop-blur-md">
               <Sparkles aria-hidden="true" className="h-3.5 w-3.5 text-blush animate-pulse" />
-              AI/ML · Systems · Strategy
+              Backend · APIs · Applied AI
             </p>
             <h1 className="text-balance font-display text-5xl font-normal italic leading-[1.05] text-pearl sm:text-6xl lg:text-8xl">
-              Engineering Intelligence. <br className="hidden sm:inline" />
-              <span className="not-italic font-semibold">Architecting Strategy.</span>
+              Engineering Reliable Systems. <br className="hidden sm:inline" />
+              <span className="not-italic font-semibold">Applying AI Where It Counts.</span>
             </h1>
             <p className="mt-8 max-w-3xl text-lg leading-8 text-mist sm:text-xl font-light">
-              Priyanshi Shah is a Computer Science & Business Systems student specializing in applied AI/ML,
-              predictive modeling, and scalable software systems.
+              Priyanshi Shah is a Computer Science & Business Systems student building backend services, REST APIs, and LLM-integrated systems with Python, FastAPI, and PostgreSQL.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <ButtonLink href="/projects">View Projects</ButtonLink>
@@ -44,7 +44,7 @@ export default function HomePage() {
           </Reveal>
           <div className="mt-16 flex items-center gap-3 text-sm uppercase tracking-[0.2em] text-mist/80">
             <ArrowDown aria-hidden="true" className="h-4 w-4 text-rose" />
-            Selected intelligence systems
+            Selected backend & AI systems
           </div>
         </Container>
       </section>
@@ -55,7 +55,7 @@ export default function HomePage() {
         <Reveal className="mx-auto max-w-5xl text-center">
           <Heart aria-hidden="true" className="mx-auto mb-8 h-8 w-8 text-rose fill-rose/20" />
           <blockquote className="text-balance font-display text-3xl font-normal italic leading-relaxed text-pearl sm:text-5xl">
-            “Where high-dimensional architecture meets strategic intelligence, I engineer systems that don&apos;t just process data—they drive decisions.”
+            “Reliable systems come first — AI is a tool I use to make them smarter, not a substitute for engineering judgment.”
           </blockquote>
         </Reveal>
       </Container>
@@ -64,8 +64,8 @@ export default function HomePage() {
         <Reveal>
           <SectionHeading
             eyebrow="Core Capabilities"
-            title="From model logic to operational systems."
-            copy="A focused practice across applied AI, perception, and robust platform foundations."
+            title="Backend discipline meets practical AI integration."
+            copy="A focused practice across async backend architecture, applied LLM workflows, and automated deployment."
           />
         </Reveal>
         <div className="mt-12 grid gap-4 md:grid-cols-3">
@@ -91,7 +91,7 @@ export default function HomePage() {
       </Container>
 
       <Container as="section" className="py-20 sm:py-28">
-        <div className="grid gap-4 lg:grid-cols-4">
+        <div className="grid gap-4 lg:grid-cols-3">
           {metrics.map((metric, index) => {
             const Icon = metric.icon;
             return (
@@ -106,7 +106,10 @@ export default function HomePage() {
                   <SilkFlower className="h-3.5 w-3.5 text-rose/30 group-hover:rotate-45 transition-transform duration-500" />
                 </div>
                 <p className="mt-8 font-display text-4xl font-normal italic text-pearl">{metric.value}</p>
-                <p className="mt-3 text-xs uppercase tracking-[0.2em] text-mist/90">{metric.label}</p>
+                <p className="mt-2 text-xs uppercase tracking-[0.2em] text-mist/90">{metric.label}</p>
+                {metric.subtext && (
+                  <p className="mt-2 text-xs text-mist/60 font-light">{metric.subtext}</p>
+                )}
               </Reveal>
             );
           })}
@@ -117,10 +120,10 @@ export default function HomePage() {
         <div className="relative overflow-hidden rounded-3xl border border-line bg-panel/50 p-8 sm:p-12 md:grid md:grid-cols-[1fr_1.4fr] md:items-center">
           <div className="flex items-center gap-4 text-blush">
             <SilkFlower size={36} className="text-rose animate-spin-slow" />
-            <span className="text-sm font-semibold uppercase tracking-[0.24em] text-mist">Engineering & Artistry</span>
+            <span className="text-sm font-semibold uppercase tracking-[0.24em] text-mist">Engineering & Reliability</span>
           </div>
           <p className="mt-6 md:mt-0 text-balance font-display text-2xl font-normal italic leading-relaxed text-pearl sm:text-3xl">
-            Built for work that needs both technical precision and strategic clarity.
+            Built for backend systems that hold up under real use — and AI features that are held to the same standard.
           </p>
         </div>
       </Container>
