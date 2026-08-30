@@ -5,6 +5,7 @@ import { useSoundEnabled, setSoundEnabled } from "./sound-manager";
 
 export function MusicPlayerWidget() {
   const soundEnabled = useSoundEnabled();
+  const [isOpen, setIsOpen] = useState(true);
   const [pos, setPos] = useState({ x: window.innerWidth - 220, y: 60 });
   const drag = useRef({ active: false, sx: 0, sy: 0, px: 0, py: 0 });
 
@@ -39,6 +40,8 @@ export function MusicPlayerWidget() {
     window.dispatchEvent(new Event("os-sound-restart"));
   };
 
+  if (!isOpen) return null;
+
   return (
     <div
       style={{ position: "absolute", left: pos.x, top: pos.y, zIndex: 40 }}
@@ -51,9 +54,15 @@ export function MusicPlayerWidget() {
       {/* Title bar */}
       <div className="bg-gradient-to-r from-[#ff4fa3] to-[#8b1d5c] px-2 py-1 flex items-center justify-between cursor-move shrink-0">
         <span className="font-vt323 text-white text-sm tracking-widest">WINAMP_MINI</span>
-        <div className="flex gap-1">
+        <div className="flex gap-1 items-center">
           <div className="w-2 h-2 bg-[#12060f] border border-[#ff85be]" />
-          <div className="w-2 h-2 bg-[#ff85be]" />
+          <div className="w-2 h-2 bg-[#ff85be] mr-1" />
+          <button 
+            onClick={() => setIsOpen(false)}
+            className="text-white hover:text-red-300 font-bold leading-none text-xs ml-1 bg-black/20 px-1 border border-white/20 active:translate-y-px"
+          >
+            x
+          </button>
         </div>
       </div>
 
