@@ -4,6 +4,7 @@ import React, { useState, useRef } from "react";
 import { WindowId } from "./types";
 import { useWindowManager } from "./window-manager-context";
 import { PixelFile, PixelFolder, PixelTerminal } from "./pixel-icons";
+import { playSound } from "./sound-manager";
 
 interface DesktopIconProps {
   id: WindowId;
@@ -23,6 +24,7 @@ export function DesktopIcon({ id, label, iconType }: DesktopIconProps) {
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    playSound("click");
     setIsSelected(true);
   };
 

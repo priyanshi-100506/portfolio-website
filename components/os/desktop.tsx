@@ -7,7 +7,10 @@ import { DesktopIcon } from "./desktop-icon";
 import { Window } from "./window";
 import { Taskbar } from "./taskbar";
 import { StartMenu } from "./start-menu";
+import { ContextMenu, AboutOSModal } from "./context-menu";
+import { Screensaver, useIdleScreensaver } from "./screensaver";
 import { WindowId } from "./types";
+import { isSoundEnabled, setSoundEnabled } from "./sound-manager";
 
 const DESKTOP_ICONS: { id: WindowId; label: string; iconType: "folder" | "file" | "terminal" }[] = [
   { id: "about",    label: "About_Me",   iconType: "file" },
@@ -16,27 +19,22 @@ const DESKTOP_ICONS: { id: WindowId; label: string; iconType: "folder" | "file" 
   { id: "resume",   label: "Resume.pdf", iconType: "file" }
 ];
 
-const ICON_W = 96;
-const ICON_H = 104;
-const TASKBAR_H = 52;
-const DRAG_THRESHOLD = 5; // px — below this we treat pointer-up as a click, not a drag
+const ICON_W  = 96;
+const ICON_H  = 104;
+const TASKBAR = 52;
+const DRAG_THRESHOLD = 5;
 
 interface IconPos { x: number; y: number }
 
-// ── Draggable wrapper for a single desktop icon ───────────────────────────────
-interface DraggableIconWrapperProps {
+// ── Draggable icon wrapper ───────────────────────────────────────────────────
+function DraggableIconWrapper({
+  icon, pos, onMove,
+}: {
   icon: typeof DESKTOP_ICONS[number];
   pos: IconPos;
   onMove: (id: WindowId, pos: IconPos) => void;
-}
-
-function DraggableIconWrapper({ icon, pos, onMove }: DraggableIconWrapperProps) {
-  const drag = useRef({
-    active: false,
-    moved: false,
-    sx: 0, sy: 0,   // start client position
-    px: 0, py: 0,   // start icon position
-  });
+}) {
+  const drag = useRef({ active: false, moved: false, sx: 0, sy: 0, px: 0, py: 0 });
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     if (e.button !== 0) return;
@@ -52,27 +50,20 @@ function DraggableIconWrapper({ icon, pos, onMove }: DraggableIconWrapperProps) 
       drag.current.moved = true;
     }
     if (drag.current.moved) {
-      const vw = window.innerWidth;
-      const vh = window.innerHeight;
       onMove(icon.id, {
-        x: Math.max(0, Math.min(vw - ICON_W, drag.current.px + dx)),
-        y: Math.max(0, Math.min(vh - TASKBAR_H - ICON_H, drag.current.py + dy)),
+        x: Math.max(0, Math.min(window.innerWidth  - ICON_W, drag.current.px + dx)),
+        y: Math.max(0, Math.min(window.innerHeight - TASKBAR - ICON_H, drag.current.py + dy)),
       });
     }
   };
 
   const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
-    try { e.currentTarget.releasePointerCapture(e.pointerId); } catch { /* */ }
+    try { e.currentTarget.releasePointerCapture(e.pointerId); } catch { /**/ }
     drag.current.active = false;
   };
 
-  // If the pointer moved enough to count as a drag, intercept the click before
-  // DesktopIcon's own click handler fires, so the window doesn't open on drag-end.
   const onClickCapture = (e: React.MouseEvent) => {
-    if (drag.current.moved) {
-      e.stopPropagation();
-      drag.current.moved = false;
-    }
+    if (drag.current.moved) { e.stopPropagation(); drag.current.moved = false; }
   };
 
   return (
@@ -89,12 +80,20 @@ function DraggableIconWrapper({ icon, pos, onMove }: DraggableIconWrapperProps) 
   );
 }
 
-// ── Main desktop surface ──────────────────────────────────────────────────────
+// ── Main desktop surface ─────────────────────────────────────────────────────
 function DesktopInner() {
   const { windows, closeStartMenu, openWindow } = useWindowManager();
   const [iconPositions, setIconPositions] = useState<Partial<Record<WindowId, IconPos>>>({});
 
-  // Scatter icons randomly on first mount
+  // Context menu state
+  const [ctxMenu, setCtxMenu] = useState<{ x: number; y: number } | null>(null);
+  const [showAbout, setShowAbout] = useState(false);
+  const [soundEnabled, setSoundState] = useState(isSoundEnabled);
+
+  // Screensaver
+  const { active: screensaverActive, dismiss: dismissScreensaver } = useIdleScreensaver();
+
+  // Scatter icons on first mount
   useEffect(() => {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
@@ -102,7 +101,7 @@ function DesktopInner() {
     DESKTOP_ICONS.forEach((icon) => {
       positions[icon.id] = {
         x: Math.round(20 + Math.random() * Math.max(0, vw - ICON_W - 40)),
-        y: Math.round(20 + Math.random() * Math.max(0, vh - TASKBAR_H - ICON_H - 40)),
+        y: Math.round(20 + Math.random() * Math.max(0, vh - TASKBAR - ICON_H - 40)),
       };
     });
     setIconPositions(positions);
@@ -112,16 +111,48 @@ function DesktopInner() {
     setIconPositions((prev) => ({ ...prev, [id]: pos }));
   }, []);
 
+  // Re-scatter icons
+  const refreshIcons = useCallback(() => {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const positions: Partial<Record<WindowId, IconPos>> = {};
+    DESKTOP_ICONS.forEach((icon) => {
+      positions[icon.id] = {
+        x: Math.round(20 + Math.random() * Math.max(0, vw - ICON_W - 40)),
+        y: Math.round(20 + Math.random() * Math.max(0, vh - TASKBAR - ICON_H - 40)),
+      };
+    });
+    setIconPositions(positions);
+  }, []);
+
+  const toggleSound = useCallback(() => {
+    const next = !soundEnabled;
+    setSoundState(next);
+    setSoundEnabled(next);
+  }, [soundEnabled]);
+
   // Auto-open About_Me 2.5s after boot
   useEffect(() => {
     const t = setTimeout(() => openWindow("about"), 2500);
     return () => clearTimeout(t);
   }, [openWindow]);
 
+  const handleContextMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    closeStartMenu();
+    setCtxMenu({ x: e.clientX, y: e.clientY });
+  };
+
+  const handleDesktopClick = () => {
+    closeStartMenu();
+    setCtxMenu(null);
+  };
+
   return (
     <div
       className="fixed inset-0 overflow-hidden"
-      onClick={closeStartMenu}
+      onClick={handleDesktopClick}
+      onContextMenu={handleContextMenu}
     >
       {/* Background video */}
       <video
@@ -132,28 +163,23 @@ function DesktopInner() {
         <source src="/media/intelligence-field.mp4" type="video/mp4" />
       </video>
 
-      {/* Bottom bleed for taskbar legibility */}
+      {/* Bottom bleed */}
       <div
         aria-hidden="true"
         className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
         style={{ background: "linear-gradient(to top, rgba(18,6,15,0.75) 0%, transparent 100%)" }}
       />
 
-      {/* CRT scanlines + vignette */}
+      {/* CRT overlays */}
       <div className="crt-scanlines" aria-hidden="true" />
       <div className="crt-vignette"  aria-hidden="true" />
 
-      {/* Desktop icons — draggable, scattered */}
+      {/* Draggable icons */}
       {DESKTOP_ICONS.map((icon) => {
         const pos = iconPositions[icon.id];
         if (!pos) return null;
         return (
-          <DraggableIconWrapper
-            key={icon.id}
-            icon={icon}
-            pos={pos}
-            onMove={handleIconMove}
-          />
+          <DraggableIconWrapper key={icon.id} icon={icon} pos={pos} onMove={handleIconMove} />
         );
       })}
 
@@ -170,11 +196,30 @@ function DesktopInner() {
 
       <StartMenu />
       <Taskbar />
+
+      {/* Right-click context menu */}
+      {ctxMenu && (
+        <ContextMenu
+          x={ctxMenu.x}
+          y={ctxMenu.y}
+          soundEnabled={soundEnabled}
+          onClose={() => setCtxMenu(null)}
+          onRefreshIcons={refreshIcons}
+          onToggleSound={toggleSound}
+          onAbout={() => setShowAbout(true)}
+        />
+      )}
+
+      {/* About OS modal */}
+      {showAbout && <AboutOSModal onClose={() => setShowAbout(false)} />}
+
+      {/* Screensaver */}
+      {screensaverActive && <Screensaver onDismiss={dismissScreensaver} />}
     </div>
   );
 }
 
-// ── Root export ───────────────────────────────────────────────────────────────
+// ── Root export ──────────────────────────────────────────────────────────────
 export function Desktop() {
   const [booted, setBooted] = useState(false);
   const handleBootComplete = useCallback(() => setBooted(true), []);

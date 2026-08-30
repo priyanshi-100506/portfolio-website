@@ -72,3 +72,24 @@ html, body {
   z-index: 9998;
   box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7);
 }
+
+/* Window open animation */
+@keyframes window-enter {
+  from { opacity: 0; transform: scale(0.90) translateY(10px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+
+/* Window close animation */
+@keyframes window-exit {
+  from { opacity: 1; transform: scale(1)    translateY(0);    }
+  to   { opacity: 0; transform: scale(0.88) translateY(8px);  }
+}
+
+.window-entering {
+  animation: window-enter 150ms cubic-bezier(0.2, 0, 0.2, 1) forwards;
+}
+
+.window-exiting {
+  animation: window-exit 130ms cubic-bezier(0.4, 0, 1, 1) forwards;
+  pointer-events: none;
+}
