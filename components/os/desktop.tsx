@@ -10,7 +10,6 @@ import { StartMenu } from "./start-menu";
 import { ContextMenu, AboutOSModal } from "./context-menu";
 import { Screensaver, useIdleScreensaver } from "./screensaver";
 import { MusicPlayerWidget } from "./music-player";
-import { StickyNoteWidget } from "./sticky-note";
 import { WindowId } from "./types";
 import { isSoundEnabled, setSoundEnabled, useSoundEnabled } from "./sound-manager";
 
@@ -131,15 +130,14 @@ function DesktopInner() {
 
       {/* Brand watermark - Centered and glowing */}
       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none -z-10" aria-hidden="true">
-        <p className="font-vt323 text-7xl sm:text-9xl text-[#ff4fa3]/10 tracking-[0.2em] mix-blend-screen"
-           style={{ textShadow: "0 0 40px rgba(255, 79, 163, 0.4), 0 0 80px rgba(255, 79, 163, 0.2)" }}>
-          PRIYANSHI_OS
+        <p className="font-vt323 text-7xl sm:text-9xl text-[#ff4fa3]/40 tracking-[0.2em] mix-blend-screen"
+           style={{ textShadow: "0 0 20px rgba(255, 79, 163, 0.8), 0 0 60px rgba(255, 79, 163, 0.5)" }}>
+          PRIYANSHI SHAH
         </p>
       </div>
 
       {/* Widgets */}
       <MusicPlayerWidget />
-      <StickyNoteWidget />
 
       {/* Open Windows */}
       {Object.values(windows)
@@ -197,6 +195,20 @@ export function Desktop() {
         bgMusicRef.current.pause();
       }
     }
+  }, [soundEnabled]);
+
+  useEffect(() => {
+    const handleRestart = () => {
+      if (bgMusicRef.current) {
+        bgMusicRef.current.currentTime = 0;
+        if (!soundEnabled) {
+          // If it was paused, maybe the user wants it to start playing when they hit restart?
+          // For now, let's just reset the time.
+        }
+      }
+    };
+    window.addEventListener("os-sound-restart", handleRestart);
+    return () => window.removeEventListener("os-sound-restart", handleRestart);
   }, [soundEnabled]);
 
   return (
