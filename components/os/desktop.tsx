@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { WindowManagerProvider, useWindowManager } from "./window-manager-context";
 import { BootSequence } from "./boot-sequence";
 import { DesktopIcon } from "./desktop-icon";
@@ -16,25 +16,100 @@ const DESKTOP_ICONS: { id: WindowId; label: string; iconType: "folder" | "file" 
   { id: "resume",   label: "Resume.pdf", iconType: "file" }
 ];
 
+const ICON_W = 96;
+const ICON_H = 104;
+const TASKBAR_H = 52;
+const DRAG_THRESHOLD = 5; // px — below this we treat pointer-up as a click, not a drag
+
+interface IconPos { x: number; y: number }
+
+// ── Draggable wrapper for a single desktop icon ───────────────────────────────
+interface DraggableIconWrapperProps {
+  icon: typeof DESKTOP_ICONS[number];
+  pos: IconPos;
+  onMove: (id: WindowId, pos: IconPos) => void;
+}
+
+function DraggableIconWrapper({ icon, pos, onMove }: DraggableIconWrapperProps) {
+  const drag = useRef({
+    active: false,
+    moved: false,
+    sx: 0, sy: 0,   // start client position
+    px: 0, py: 0,   // start icon position
+  });
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0) return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    drag.current = { active: true, moved: false, sx: e.clientX, sy: e.clientY, px: pos.x, py: pos.y };
+  };
+
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!drag.current.active) return;
+    const dx = e.clientX - drag.current.sx;
+    const dy = e.clientY - drag.current.sy;
+    if (!drag.current.moved && (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD)) {
+      drag.current.moved = true;
+    }
+    if (drag.current.moved) {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      onMove(icon.id, {
+        x: Math.max(0, Math.min(vw - ICON_W, drag.current.px + dx)),
+        y: Math.max(0, Math.min(vh - TASKBAR_H - ICON_H, drag.current.py + dy)),
+      });
+    }
+  };
+
+  const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    try { e.currentTarget.releasePointerCapture(e.pointerId); } catch { /* */ }
+    drag.current.active = false;
+  };
+
+  // If the pointer moved enough to count as a drag, intercept the click before
+  // DesktopIcon's own click handler fires, so the window doesn't open on drag-end.
+  const onClickCapture = (e: React.MouseEvent) => {
+    if (drag.current.moved) {
+      e.stopPropagation();
+      drag.current.moved = false;
+    }
+  };
+
+  return (
+    <div
+      style={{ position: "absolute", left: pos.x, top: pos.y, zIndex: 10, touchAction: "none" }}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerUp}
+      onClickCapture={onClickCapture}
+    >
+      <DesktopIcon {...icon} />
+    </div>
+  );
+}
+
+// ── Main desktop surface ──────────────────────────────────────────────────────
 function DesktopInner() {
   const { windows, closeStartMenu, openWindow } = useWindowManager();
-  const [iconPositions, setIconPositions] = useState<Partial<Record<WindowId, { x: number; y: number }>>>({});
+  const [iconPositions, setIconPositions] = useState<Partial<Record<WindowId, IconPos>>>({});
 
   // Scatter icons randomly on first mount
   useEffect(() => {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    const TASKBAR = 52;
-    const ICON_W = 96;
-    const ICON_H = 100;
-    const positions: Record<string, { x: number; y: number }> = {};
+    const positions: Partial<Record<WindowId, IconPos>> = {};
     DESKTOP_ICONS.forEach((icon) => {
       positions[icon.id] = {
         x: Math.round(20 + Math.random() * Math.max(0, vw - ICON_W - 40)),
-        y: Math.round(20 + Math.random() * Math.max(0, vh - TASKBAR - ICON_H - 40)),
+        y: Math.round(20 + Math.random() * Math.max(0, vh - TASKBAR_H - ICON_H - 40)),
       };
     });
     setIconPositions(positions);
+  }, []);
+
+  const handleIconMove = useCallback((id: WindowId, pos: IconPos) => {
+    setIconPositions((prev) => ({ ...prev, [id]: pos }));
   }, []);
 
   // Auto-open About_Me 2.5s after boot
@@ -68,18 +143,17 @@ function DesktopInner() {
       <div className="crt-scanlines" aria-hidden="true" />
       <div className="crt-vignette"  aria-hidden="true" />
 
-      {/* Desktop icons — scattered */}
+      {/* Desktop icons — draggable, scattered */}
       {DESKTOP_ICONS.map((icon) => {
         const pos = iconPositions[icon.id];
         if (!pos) return null;
         return (
-          <div
+          <DraggableIconWrapper
             key={icon.id}
-            className="absolute z-10"
-            style={{ left: pos.x, top: pos.y }}
-          >
-            <DesktopIcon {...icon} />
-          </div>
+            icon={icon}
+            pos={pos}
+            onMove={handleIconMove}
+          />
         );
       })}
 
@@ -100,6 +174,7 @@ function DesktopInner() {
   );
 }
 
+// ── Root export ───────────────────────────────────────────────────────────────
 export function Desktop() {
   const [booted, setBooted] = useState(false);
   const handleBootComplete = useCallback(() => setBooted(true), []);
