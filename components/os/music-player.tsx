@@ -49,7 +49,7 @@ export function MusicPlayerWidget() {
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
-      className="w-[180px] h-[180px] bg-[#1a0816] border-2 border-[#ff4fa3] shadow-[4px_4px_0px_rgba(0,0,0,0.8)] font-mono select-none flex flex-col"
+      className="w-[180px] bg-[#1a0816] border-2 border-[#ff4fa3] shadow-[4px_4px_0px_rgba(0,0,0,0.8)] font-mono select-none flex flex-col"
     >
       {/* Title bar */}
       <div className="bg-gradient-to-r from-[#ff4fa3] to-[#8b1d5c] px-2 py-1 flex items-center justify-between cursor-move shrink-0">
@@ -61,7 +61,7 @@ export function MusicPlayerWidget() {
             onClick={() => setIsOpen(false)}
             className="text-white hover:text-red-300 font-bold leading-none text-xs ml-1 bg-black/20 px-1 border border-white/20 active:translate-y-px"
           >
-            x
+            X
           </button>
         </div>
       </div>
@@ -76,11 +76,13 @@ export function MusicPlayerWidget() {
           </div>
           <div className="truncate text-sm text-[#ff85be]">
             {soundEnabled ? (
-              <span className="inline-block animate-[marquee_5s_linear_infinite]">
+              <span className="inline-block whitespace-nowrap animate-[marquee_5s_linear_infinite]">
                 Don't You (Forget About Me)
               </span>
             ) : (
-              "Don't You (Forget About Me)"
+              <span className="inline-block whitespace-nowrap">
+                Don't You (Forget About Me)
+              </span>
             )}
           </div>
         </div>
