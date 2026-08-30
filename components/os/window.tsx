@@ -29,6 +29,8 @@ export function Window({ windowState }: { windowState: WindowState }) {
   const drag = useRef({ active: false, sx: 0, sy: 0, px: 0, py: 0 });
 
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    // Don't start drag if a control button was clicked
+    if ((e.target as HTMLElement).closest('button')) return;
     if (isMaximized || e.button !== 0) return;
     focusWindow(id);
     e.currentTarget.setPointerCapture(e.pointerId);
@@ -118,19 +120,21 @@ export function Window({ windowState }: { windowState: WindowState }) {
           {/* Minimize */}
           <button
             type="button"
+            onPointerDown={(e) => e.stopPropagation()}
             onClick={(e) => { e.stopPropagation(); minimizeWindow(id); }}
             aria-label={`Minimize ${title}`}
-            className="w-5 h-5 flex items-center justify-center text-[10px] font-bold bg-[#12060f] text-[#ff85be] border border-[#ff4fa3]/80 hover:bg-[#ff4fa3] hover:text-[#12060f] active:translate-x-px active:translate-y-px"
+            className="w-6 h-5 flex items-center justify-center text-[11px] font-bold bg-[#12060f] text-[#ff85be] border border-[#ff4fa3]/80 hover:bg-[#ffb347] hover:text-[#12060f] active:translate-x-px active:translate-y-px cursor-pointer"
             title="Minimize"
           >
-            _
+            −
           </button>
           {/* Maximize / Restore */}
           <button
             type="button"
+            onPointerDown={(e) => e.stopPropagation()}
             onClick={(e) => { e.stopPropagation(); maximizeWindow(id); }}
             aria-label={isMaximized ? `Restore ${title}` : `Maximize ${title}`}
-            className="w-5 h-5 flex items-center justify-center text-[10px] font-bold bg-[#12060f] text-[#ff85be] border border-[#ff4fa3]/80 hover:bg-[#ff4fa3] hover:text-[#12060f] active:translate-x-px active:translate-y-px"
+            className="w-6 h-5 flex items-center justify-center text-[11px] font-bold bg-[#12060f] text-[#ff85be] border border-[#ff4fa3]/80 hover:bg-[#7df9c2] hover:text-[#12060f] active:translate-x-px active:translate-y-px cursor-pointer"
             title={isMaximized ? "Restore" : "Maximize"}
           >
             {isMaximized ? "❐" : "□"}
@@ -138,9 +142,10 @@ export function Window({ windowState }: { windowState: WindowState }) {
           {/* Close */}
           <button
             type="button"
+            onPointerDown={(e) => e.stopPropagation()}
             onClick={(e) => { e.stopPropagation(); closeWindow(id); }}
             aria-label={`Close ${title}`}
-            className="w-5 h-5 flex items-center justify-center text-[10px] font-bold bg-[#12060f] text-[#ff85be] border border-[#ff4fa3]/80 hover:bg-[#ff4fa3] hover:text-[#12060f] active:translate-x-px active:translate-y-px"
+            className="w-6 h-5 flex items-center justify-center text-[11px] font-bold bg-[#12060f] text-[#ff85be] border border-[#ff4fa3]/80 hover:bg-[#ff4fa3] hover:text-[#12060f] active:translate-x-px active:translate-y-px cursor-pointer"
             title="Close"
           >
             ✕

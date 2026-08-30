@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { useWindowManager } from "./window-manager-context";
 import { WindowId } from "./types";
-import { PixelFile, PixelFloppy, PixelFolder, PixelTerminal } from "./pixel-icons";
+import { PixelFile, PixelFolder, PixelTerminal } from "./pixel-icons";
+import { SilkFlower } from "@/components/silk-flower";
 
 export function Taskbar() {
   const {
@@ -67,21 +68,25 @@ export function Taskbar() {
       className="fixed bottom-0 inset-x-0 h-[44px] z-[9995] bg-[#1a0816] border-t-2 border-[#ff4fa3] flex items-center justify-between px-2 gap-2 font-mono select-none"
     >
       {/* Left: START Button */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center">
         <button
           id="os-start-button"
           type="button"
           aria-expanded={isStartMenuOpen}
           aria-label="Toggle Start Menu"
           onClick={toggleStartMenu}
-          className={`flex items-center gap-2 px-3 py-1 text-sm font-vt323 tracking-wider font-bold border-2 transition active:translate-x-0.5 active:translate-y-0.5 ${
+          className={`flex items-center justify-center w-10 h-8 border-2 transition active:translate-x-0.5 active:translate-y-0.5 ${
             isStartMenuOpen
-              ? "bg-[#ff4fa3] text-[#12060f] border-[#ff85be] shadow-[inset_2px_2px_0px_#8b1d5c]"
-              : "bg-[#12060f] text-[#ff85be] border-[#ff4fa3] shadow-[2px_2px_0px_#000000] hover:bg-[#ff4fa3]/20 hover:text-white"
+              ? "bg-[#ff4fa3] border-[#ff85be] shadow-[inset_2px_2px_0px_#8b1d5c]"
+              : "bg-[#12060f] border-[#ff4fa3] shadow-[2px_2px_0px_#000000] hover:bg-[#ff4fa3]/20"
           }`}
         >
-          <PixelFloppy className="w-4 h-4" />
-          <span>START</span>
+          <SilkFlower
+            size={20}
+            className={`transition-transform duration-300 ${
+              isStartMenuOpen ? "text-[#12060f] rotate-45" : "text-[#ff85be] hover:text-white"
+            }`}
+          />
         </button>
       </div>
 
