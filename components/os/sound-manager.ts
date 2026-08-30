@@ -1,6 +1,7 @@
+import React from "react";
+
 // Pure Web Audio API synth — no external files.
 // Works client-side only; silently no-ops on server.
-
 let _ctx: AudioContext | null = null;
 
 function getCtx(): AudioContext | null {
@@ -61,7 +62,20 @@ export function isSoundEnabled(): boolean { return _enabled; }
 
 export function setSoundEnabled(v: boolean): void {
   _enabled = v;
-  if (typeof window !== "undefined") localStorage.setItem("os-sound", String(v));
+  if (typeof window !== "undefined") {
+    localStorage.setItem("os-sound", String(v));
+    window.dispatchEvent(new Event("os-sound-change"));
+  }
+}
+
+export function useSoundEnabled() {
+  const [enabled, setEnabled] = React.useState(isSoundEnabled);
+  React.useEffect(() => {
+    const handle = () => setEnabled(isSoundEnabled());
+    window.addEventListener("os-sound-change", handle);
+    return () => window.removeEventListener("os-sound-change", handle);
+  }, []);
+  return enabled;
 }
 
 export function playSound(name: keyof typeof SOUNDS): void {

@@ -10,7 +10,7 @@ import { StartMenu } from "./start-menu";
 import { ContextMenu, AboutOSModal } from "./context-menu";
 import { Screensaver, useIdleScreensaver } from "./screensaver";
 import { WindowId } from "./types";
-import { isSoundEnabled, setSoundEnabled } from "./sound-manager";
+import { isSoundEnabled, setSoundEnabled, useSoundEnabled } from "./sound-manager";
 
 const DESKTOP_ICONS: { id: WindowId; label: string; iconType: "folder" | "file" | "terminal" }[] = [
   { id: "about",    label: "About_Me",   iconType: "file" },
@@ -28,7 +28,6 @@ export interface IconPos { x: number; y: number }
 function DesktopInner() {
   const { windows, closeStartMenu, openWindow } = useWindowManager();
   const [iconPositions, setIconPositions] = useState<Partial<Record<WindowId, IconPos>>>({});
-  const bgMusicRef = useRef<HTMLAudioElement>(null);
 
   // Context menu state
   const [ctxMenu, setCtxMenu] = useState<{ x: number; y: number } | null>(null);
@@ -82,21 +81,6 @@ function DesktopInner() {
     return () => clearTimeout(t);
   }, [openWindow]);
 
-  // Handle background music playback
-  useEffect(() => {
-    if (bgMusicRef.current) {
-      if (soundEnabled) {
-        // volume is very low to not be obnoxious
-        bgMusicRef.current.volume = 0.15;
-        bgMusicRef.current.play().catch(() => {
-          // browser blocked autoplay; requires user interaction first
-        });
-      } else {
-        bgMusicRef.current.pause();
-      }
-    }
-  }, [soundEnabled]);
-
   const handleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     closeStartMenu();
@@ -128,14 +112,6 @@ function DesktopInner() {
         aria-hidden="true"
         className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
         style={{ background: "linear-gradient(to top, rgba(18,6,15,0.75) 0%, transparent 100%)" }}
-      />
-
-      {/* Background audio */}
-      <audio
-        ref={bgMusicRef}
-        src="/media/dont_you.mp3"
-        loop
-        preload="auto"
       />
 
       {/* CRT overlays */}
@@ -191,9 +167,33 @@ function DesktopInner() {
 export function Desktop() {
   const [booted, setBooted] = useState(false);
   const handleBootComplete = useCallback(() => setBooted(true), []);
+  
+  const soundEnabled = useSoundEnabled();
+  const bgMusicRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    if (bgMusicRef.current) {
+      if (soundEnabled) {
+        bgMusicRef.current.volume = 0.15;
+        bgMusicRef.current.play().catch(() => {
+          // Play requires user interaction; if it fails, it will play on next interaction
+          const playOnInteract = () => {
+            bgMusicRef.current?.play().catch(() => {});
+            document.removeEventListener("pointerdown", playOnInteract);
+            document.removeEventListener("keydown", playOnInteract);
+          };
+          document.addEventListener("pointerdown", playOnInteract);
+          document.addEventListener("keydown", playOnInteract);
+        });
+      } else {
+        bgMusicRef.current.pause();
+      }
+    }
+  }, [soundEnabled]);
 
   return (
     <WindowManagerProvider>
+      <audio ref={bgMusicRef} src="/media/dont_you.mp3" loop preload="auto" />
       <BootSequence onComplete={handleBootComplete} />
       {booted && <DesktopInner />}
     </WindowManagerProvider>
