@@ -1,4 +1,4 @@
-import { ArrowDown, Brain, CircuitBoard, Eye, Layers3 } from "lucide-react";
+import { ArrowDown, Sparkles, Heart, Eye, Layers3 } from "lucide-react";
 import { AnimatedTicker } from "@/components/animated-ticker";
 import { ButtonLink } from "@/components/button-link";
 import { Container } from "@/components/container";
@@ -13,7 +13,7 @@ export default function HomePage() {
         <video
           aria-hidden="true"
           autoPlay
-          className="absolute inset-0 h-full w-full object-cover opacity-32"
+          className="absolute inset-0 h-full w-full object-cover opacity-35"
           loop
           muted
           playsInline
@@ -22,17 +22,18 @@ export default function HomePage() {
         >
           <source src="/media/intelligence-field.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/35 via-ink/78 to-ink" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/80 to-ink" />
         <Container className="relative z-10">
           <Reveal className="max-w-5xl">
-            <p className="mb-6 inline-flex items-center gap-3 rounded-full border border-line bg-white/[0.04] px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-cyan">
-              <CircuitBoard aria-hidden="true" className="h-4 w-4" />
+            <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-rose/30 bg-rose/[0.08] px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-blush backdrop-blur-md">
+              <Sparkles aria-hidden="true" className="h-3.5 w-3.5 text-blush animate-pulse" />
               AI/ML · Systems · Strategy
             </p>
-            <h1 className="text-balance font-display text-5xl font-semibold leading-[0.98] text-pearl sm:text-6xl lg:text-8xl">
-              Engineering Intelligence. Architecting Strategy.
+            <h1 className="text-balance font-display text-5xl font-normal italic leading-[1.05] text-pearl sm:text-6xl lg:text-8xl">
+              Engineering Intelligence. <br className="hidden sm:inline" />
+              <span className="not-italic font-semibold">Architecting Strategy.</span>
             </h1>
-            <p className="mt-8 max-w-3xl text-lg leading-8 text-mist sm:text-xl">
+            <p className="mt-8 max-w-3xl text-lg leading-8 text-mist sm:text-xl font-light">
               Priyanshi Shah is a Computer Science & Business Systems student specializing in applied AI/ML,
               predictive modeling, and scalable software systems.
             </p>
@@ -41,8 +42,8 @@ export default function HomePage() {
               <ButtonLink href="/about" variant="secondary">About Me</ButtonLink>
             </div>
           </Reveal>
-          <div className="mt-16 flex items-center gap-3 text-sm uppercase tracking-[0.2em] text-mist">
-            <ArrowDown aria-hidden="true" className="h-4 w-4" />
+          <div className="mt-16 flex items-center gap-3 text-sm uppercase tracking-[0.2em] text-mist/80">
+            <ArrowDown aria-hidden="true" className="h-4 w-4 text-rose" />
             Selected intelligence systems
           </div>
         </Container>
@@ -52,8 +53,8 @@ export default function HomePage() {
 
       <Container as="section" className="py-24 sm:py-32">
         <Reveal className="mx-auto max-w-5xl text-center">
-          <Brain aria-hidden="true" className="mx-auto mb-8 h-10 w-10 text-brass" />
-          <blockquote className="text-balance font-display text-3xl font-semibold leading-tight text-pearl sm:text-5xl">
+          <Heart aria-hidden="true" className="mx-auto mb-8 h-8 w-8 text-rose fill-rose/20" />
+          <blockquote className="text-balance font-display text-3xl font-normal italic leading-relaxed text-pearl sm:text-5xl">
             “Where high-dimensional architecture meets strategic intelligence, I engineer systems that don&apos;t just process data—they drive decisions.”
           </blockquote>
         </Reveal>

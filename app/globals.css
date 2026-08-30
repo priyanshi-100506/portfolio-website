@@ -50,6 +50,24 @@ body {
   text-wrap: balance;
 }
 
+/* Custom delicate scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #120a0d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(226, 180, 189, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(226, 180, 189, 0.45);
+}
+
 .noise {
   position: fixed;
   inset: 0;
@@ -57,8 +75,8 @@ body {
   pointer-events: none;
   opacity: 0.28;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    linear-gradient(rgba(247, 214, 208, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 214, 208, 0.03) 1px, transparent 1px);
   background-size: 72px 72px;
   mask-image: linear-gradient(to bottom, black, transparent 78%);
 }

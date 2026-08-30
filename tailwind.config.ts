@@ -9,11 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#120a0d",
-        graphite: "#1c1216",
-        panel: "#26191f",
-        line: "rgba(226, 180, 189, 0.2)",
-        mist: "#d8c4c8",
+        ink: "#0f080b",
+        graphite: "#180f13",
+        panel: "#22141a",
+        line: "rgba(226, 180, 189, 0.22)",
+        mist: "#e0cbd0",
         pearl: "rgb(255, 245, 245)",
         blush: "rgb(247, 214, 208)",
         rose: "rgb(226, 180, 189)",
@@ -23,11 +23,12 @@ const config: Config = {
         signal: "rgb(226, 180, 189)"
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["Space Grotesk", "Inter", "ui-sans-serif", "system-ui", "sans-serif"]
+        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-playfair)", "Georgia", "serif"]
       },
       boxShadow: {
-        glow: "0 0 60px rgba(226, 180, 189, 0.18)"
+        glow: "0 0 60px rgba(226, 180, 189, 0.22)",
+        card: "0 8px 32px 0 rgba(226, 180, 189, 0.1)"
       }
     }
   },
