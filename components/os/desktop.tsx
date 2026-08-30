@@ -38,16 +38,16 @@ function DesktopInner() {
         muted
         playsInline
         preload="metadata"
-        className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover opacity-60 pointer-events-none"
       >
         <source src="/media/intelligence-field.mp4" type="video/mp4" />
       </video>
 
-      {/* Dark plum overlay so video doesn't overpower the OS */}
+      {/* Very subtle dark bleed only at bottom so taskbar text stays legible */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse at 30% 20%, rgba(42,8,32,0.85) 0%, rgba(18,6,15,0.92) 70%)" }}
+        className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
+        style={{ background: "linear-gradient(to top, rgba(18,6,15,0.75) 0%, transparent 100%)" }}
       />
 
       {/* CRT scanlines + vignette */}
