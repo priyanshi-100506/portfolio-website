@@ -28,6 +28,7 @@ export interface IconPos { x: number; y: number }
 function DesktopInner() {
   const { windows, closeStartMenu, openWindow } = useWindowManager();
   const [iconPositions, setIconPositions] = useState<Partial<Record<WindowId, IconPos>>>({});
+  const bgMusicRef = useRef<HTMLAudioElement>(null);
 
   // Context menu state
   const [ctxMenu, setCtxMenu] = useState<{ x: number; y: number } | null>(null);
@@ -81,6 +82,21 @@ function DesktopInner() {
     return () => clearTimeout(t);
   }, [openWindow]);
 
+  // Handle background music playback
+  useEffect(() => {
+    if (bgMusicRef.current) {
+      if (soundEnabled) {
+        // volume is very low to not be obnoxious
+        bgMusicRef.current.volume = 0.15;
+        bgMusicRef.current.play().catch(() => {
+          // browser blocked autoplay; requires user interaction first
+        });
+      } else {
+        bgMusicRef.current.pause();
+      }
+    }
+  }, [soundEnabled]);
+
   const handleContextMenu = (e: React.MouseEvent) => {
     e.preventDefault();
     closeStartMenu();
@@ -112,6 +128,14 @@ function DesktopInner() {
         aria-hidden="true"
         className="absolute inset-x-0 bottom-0 h-20 pointer-events-none"
         style={{ background: "linear-gradient(to top, rgba(18,6,15,0.75) 0%, transparent 100%)" }}
+      />
+
+      {/* Background audio */}
+      <audio
+        ref={bgMusicRef}
+        src="/media/dont_you.mp3"
+        loop
+        preload="auto"
       />
 
       {/* CRT overlays */}
