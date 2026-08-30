@@ -84,23 +84,23 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           <div className="mt-6 flex flex-wrap gap-3">
             {project.liveDemo && (
               <a
-                className="inline-flex items-center gap-1.5 rounded-full border border-cyan/40 bg-cyan/[0.08] px-4 py-1.5 text-xs font-semibold text-cyan transition hover:bg-cyan/20"
+                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-blush to-rose px-4 py-2 text-xs font-semibold text-ink shadow-sm shadow-rose/20 transition-all duration-300 hover:from-pearl hover:to-blush hover:shadow-md hover:scale-105"
                 href={project.liveDemo}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <ExternalLink className="h-3 w-3" />
+                <ExternalLink className="h-3.5 w-3.5 text-ink" />
                 Live Demo
               </a>
             )}
             {project.github && (
               <a
-                className="inline-flex items-center gap-1.5 rounded-full border border-line bg-white/[0.04] px-4 py-1.5 text-xs font-semibold text-mist transition hover:border-pearl/40 hover:text-pearl"
+                className="inline-flex items-center gap-1.5 rounded-full border border-rose/50 bg-rose/[0.12] px-4 py-2 text-xs font-semibold text-pearl backdrop-blur-sm transition-all duration-300 hover:border-rose hover:bg-rose/25 hover:text-pearl hover:scale-105"
                 href={project.github}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <GitBranch className="h-3 w-3" />
+                <GitBranch className="h-3.5 w-3.5 text-blush" />
                 GitHub
               </a>
             )}

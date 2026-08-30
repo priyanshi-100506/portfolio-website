@@ -21,10 +21,10 @@ export function ButtonLink({
   ariaLabel
 }: ButtonLinkProps) {
   const classes = clsx(
-    "group inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold transition duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan",
+    "group inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose shadow-md",
     variant === "primary"
-      ? "bg-pearl text-ink hover:bg-cyan"
-      : "border border-line bg-white/5 text-pearl hover:border-cyan/60 hover:bg-cyan/10"
+      ? "bg-gradient-to-r from-blush to-rose text-ink shadow-rose/20 hover:from-pearl hover:to-blush hover:shadow-lg hover:shadow-rose/30 hover:scale-[1.02] active:scale-[0.98]"
+      : "border border-rose/40 bg-rose/[0.12] text-pearl backdrop-blur-md hover:border-rose hover:bg-rose/25 hover:text-pearl hover:shadow-md hover:shadow-rose/20 hover:scale-[1.02] active:scale-[0.98]"
   );
 
   const content = (
