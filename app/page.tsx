@@ -10,7 +10,7 @@ import { SilkFlower } from "@/components/silk-flower";
 export default function HomePage() {
   return (
     <main id="main">
-      <section className="relative flex min-h-[92vh] items-end overflow-hidden pb-12 pt-28">
+      <section className="relative flex min-h-[90vh] sm:min-h-[92vh] items-end overflow-hidden pb-10 sm:pb-12 pt-24 sm:pt-28">
         <video
           aria-hidden="true"
           autoPlay
@@ -26,24 +26,24 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-ink/80 to-ink" />
         <Container className="relative z-10">
           <Reveal className="max-w-5xl">
-            <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-rose/30 bg-rose/[0.08] px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-blush backdrop-blur-md">
-              <Sparkles aria-hidden="true" className="h-3.5 w-3.5 text-blush animate-pulse" />
+            <p className="mb-4 sm:mb-6 inline-flex items-center gap-2 rounded-full border border-rose/30 bg-rose/[0.08] px-3.5 sm:px-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.24em] text-blush backdrop-blur-md">
+              <Sparkles aria-hidden="true" className="h-3 sm:h-3.5 w-3 sm:w-3.5 text-blush animate-pulse" />
               Backend · APIs · Applied AI
             </p>
-            <h1 className="text-balance font-display text-5xl font-semibold tracking-tight leading-[0.98] text-pearl sm:text-6xl lg:text-8xl">
+            <h1 className="text-balance font-display text-3xl xs:text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-semibold tracking-tight leading-[1.08] sm:leading-[0.98] text-pearl">
               Engineering Reliable Systems. <br className="hidden sm:inline" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pearl via-blush to-rose">Applying AI Where It Counts.</span>
             </h1>
-            <p className="mt-8 max-w-3xl text-lg leading-8 text-mist sm:text-xl font-normal">
+            <p className="mt-5 sm:mt-8 max-w-3xl text-base sm:text-lg lg:text-xl leading-relaxed sm:leading-8 text-mist font-normal">
               Priyanshi Shah is a Computer Science & Business Systems student building backend services, REST APIs, and LLM-integrated systems with Python, FastAPI, and PostgreSQL.
             </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3">
               <ButtonLink href="/projects">View Projects</ButtonLink>
               <ButtonLink href="/about" variant="secondary">About Me</ButtonLink>
             </div>
           </Reveal>
-          <div className="mt-16 flex items-center gap-3 text-sm uppercase tracking-[0.2em] text-mist/80">
-            <ArrowDown aria-hidden="true" className="h-4 w-4 text-rose" />
+          <div className="mt-10 sm:mt-16 flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm uppercase tracking-[0.16em] sm:tracking-[0.2em] text-mist/80">
+            <ArrowDown aria-hidden="true" className="h-3.5 sm:h-4 w-3.5 sm:w-4 text-rose" />
             Selected backend & AI systems
           </div>
         </Container>

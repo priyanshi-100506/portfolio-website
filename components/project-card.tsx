@@ -20,66 +20,66 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
   return (
     <Reveal
       as="article"
-      className="group relative overflow-hidden rounded-2xl border border-line bg-panel/70 p-6 shadow-glow transition duration-500 hover:-translate-y-1.5 hover:border-rose/60 sm:p-8"
+      className="group relative overflow-hidden rounded-2xl border border-line bg-panel/70 p-5 sm:p-8 shadow-glow transition duration-500 hover:-translate-y-1.5 hover:border-rose/60"
       delay={index * 0.06}
     >
       <div className="absolute -right-8 -top-8 h-44 w-44 text-rose/10 transition-transform duration-700 group-hover:rotate-45 group-hover:scale-125 pointer-events-none">
         <SilkFlower size={176} className="text-rose/15" />
       </div>
       <div className="relative">
-        <div className="mb-8 flex items-start justify-between gap-6">
+        <div className="mb-6 sm:mb-8 flex items-start justify-between gap-4">
           <div>
             <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.24em] text-blush">
               <SilkFlower className="h-3.5 w-3.5 text-rose" />
               Project 0{index + 1}
             </p>
-            <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-pearl sm:text-3xl">{project.title}</h2>
+            <h2 className="mt-2 sm:mt-3 font-display text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight text-pearl">{project.title}</h2>
           </div>
-          <div className="mt-1 flex items-center gap-3">
+          <div className="mt-1 flex items-center gap-2.5 sm:gap-3">
             {project.github && (
               <a
                 aria-label={`${project.title} GitHub repository`}
-                className="text-mist transition hover:text-pearl"
+                className="text-mist transition hover:text-pearl p-1"
                 href={project.github}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <GitBranch className="h-5 w-5" />
+                <GitBranch className="h-4 sm:h-5 w-4 sm:w-5" />
               </a>
             )}
             {project.liveDemo && (
               <a
                 aria-label={`${project.title} live demo`}
-                className="text-mist transition hover:text-cyan"
+                className="text-mist transition hover:text-blush p-1"
                 href={project.liveDemo}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <ExternalLink className="h-5 w-5" />
+                <ExternalLink className="h-4 sm:h-5 w-4 sm:w-5" />
               </a>
             )}
-            <ArrowUpRight aria-hidden="true" className="h-5 w-5 text-cyan transition group-hover:-translate-y-1 group-hover:translate-x-1" />
+            <ArrowUpRight aria-hidden="true" className="h-4 sm:h-5 w-4 sm:w-5 text-rose transition group-hover:-translate-y-1 group-hover:translate-x-1" />
           </div>
         </div>
-        <p className="text-lg leading-8 text-pearl">{project.tagline}</p>
-        <div className="mt-8 grid gap-5 md:grid-cols-2">
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan">Problem</h3>
-            <p className="mt-3 leading-7 text-mist">{project.problem}</p>
+        <p className="text-base sm:text-lg leading-relaxed sm:leading-8 text-pearl">{project.tagline}</p>
+        <div className="mt-6 sm:mt-8 grid gap-4 sm:gap-5 md:grid-cols-2">
+          <div className="rounded-xl border border-line/60 bg-white/[0.02] p-4 sm:p-5">
+            <h3 className="text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-blush">Problem</h3>
+            <p className="mt-2 sm:mt-3 text-xs sm:text-sm leading-relaxed sm:leading-7 text-mist font-normal">{project.problem}</p>
           </div>
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan">Solution</h3>
-            <p className="mt-3 leading-7 text-mist">{project.solution}</p>
+          <div className="rounded-xl border border-line/60 bg-white/[0.02] p-4 sm:p-5">
+            <h3 className="text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-blush">Solution</h3>
+            <p className="mt-2 sm:mt-3 text-xs sm:text-sm leading-relaxed sm:leading-7 text-mist font-normal">{project.solution}</p>
           </div>
         </div>
-        <div className="mt-8 flex flex-wrap gap-2">
+        <div className="mt-6 sm:mt-8 flex flex-wrap gap-1.5 sm:gap-2">
           {project.technologies.map((technology) => (
-            <span className="rounded-full border border-line bg-white/[0.04] px-3 py-1 text-xs font-medium text-mist" key={technology}>
+            <span className="rounded-full border border-line bg-white/[0.04] px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-medium text-mist" key={technology}>
               {technology}
             </span>
           ))}
         </div>
-        <p className="mt-8 border-t border-line pt-5 text-sm font-medium leading-7 text-signal">{project.outcome}</p>
+        <p className="mt-6 sm:mt-8 border-t border-line pt-4 sm:pt-5 text-xs sm:text-sm font-medium leading-relaxed sm:leading-7 text-blush">{project.outcome}</p>
         {(project.liveDemo || project.github) && (
           <div className="mt-6 flex flex-wrap gap-3">
             {project.liveDemo && (

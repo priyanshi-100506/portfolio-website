@@ -56,26 +56,33 @@ export function SiteHeader() {
 
       <div
         className={clsx(
-          "grid border-t border-line bg-ink/96 transition-all duration-300 md:hidden",
-          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+          "fixed inset-x-0 top-16 z-50 border-b border-line bg-ink/95 backdrop-blur-2xl transition-all duration-300 md:hidden",
+          isOpen ? "max-h-[calc(100vh-4rem)] opacity-100 py-6" : "max-h-0 opacity-0 overflow-hidden py-0"
         )}
         id="mobile-navigation"
       >
-        <div className="overflow-hidden">
-          <div className="space-y-1 px-5 py-4">
-            {navItems.map((item) => (
-              <Link
-                className={clsx(
-                  "block rounded-xl px-4 py-3 text-base text-mist",
-                  pathname === item.href && "bg-white/10 text-pearl"
-                )}
-                href={item.href}
-                key={item.href}
-                onClick={() => setIsOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
+        <div className="px-6 space-y-3">
+          {navItems.map((item) => (
+            <Link
+              className={clsx(
+                "flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-medium transition duration-200",
+                pathname === item.href
+                  ? "bg-rose/[0.12] border border-rose/30 text-pearl font-semibold"
+                  : "text-mist hover:bg-white/[0.04] hover:text-pearl"
+              )}
+              href={item.href}
+              key={item.href}
+              onClick={() => setIsOpen(false)}
+            >
+              <span>{item.label}</span>
+              {pathname === item.href && <SilkFlower className="h-4 w-4 text-rose" />}
+            </Link>
+          ))}
+          <div className="pt-4 border-t border-line/60 flex items-center justify-between text-xs text-mist/70 px-2">
+            <span>{siteConfig.name}</span>
+            <a href={`mailto:${siteConfig.email}`} className="text-blush hover:underline">
+              {siteConfig.email}
+            </a>
           </div>
         </div>
       </div>

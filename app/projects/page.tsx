@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <main id="main">
-      <Container className="pb-16 pt-32 sm:pt-40">
+      <Container className="pb-16 pt-24 sm:pt-36 lg:pt-40">
         <Reveal>
           <SectionHeading
             eyebrow="Projects"
@@ -21,7 +21,7 @@ export default function ProjectsPage() {
             copy="Each project is a real, deployed system — not a notebook or a demo. Built with the same testing and reliability discipline whether or not AI is in the loop."
           />
         </Reveal>
-        <div className="mt-14 grid gap-6">
+        <div className="mt-10 sm:mt-14 grid gap-5 sm:gap-6">
           {projects.map((project, index) => (
             <ProjectCard project={project} index={index} key={project.title} />
           ))}
