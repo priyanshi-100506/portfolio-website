@@ -33,10 +33,10 @@ export default function AboutPage() {
                 <SilkFlower className="h-3.5 w-3.5 text-rose" />
                 Profile
               </p>
-              <h2 className="mt-6 font-display text-3xl font-normal italic leading-tight text-pearl">
+              <h2 className="mt-6 font-display text-3xl font-semibold leading-tight text-pearl">
                 Good AI features sit on top of good backends — not instead of them.
               </h2>
-              <p className="mt-5 leading-8 text-mist font-light">
+              <p className="mt-5 leading-8 text-mist font-normal">
                 Her work centers on systems that are tested, deployable, and understandable — whether or not an LLM is part of the pipeline.
               </p>
             </div>
@@ -50,7 +50,7 @@ export default function AboutPage() {
                 key={highlight}
               >
                 <CheckCircle2 aria-hidden="true" className="mt-1 h-5 w-5 shrink-0 text-blush" />
-                <p className="leading-7 text-mist font-light">{highlight}</p>
+                <p className="leading-7 text-mist font-normal">{highlight}</p>
               </Reveal>
             ))}
           </div>
@@ -66,7 +66,7 @@ export default function AboutPage() {
                   <SilkFlower className="h-4 w-4 text-rose/30 group-hover:rotate-45 transition-transform duration-500" />
                 </div>
                 <p className="mt-8 text-xs font-semibold uppercase tracking-[0.22em] text-mist/90">{pillar.label}</p>
-                <h2 className="mt-3 font-display text-2xl font-normal italic text-pearl">{pillar.value}</h2>
+                <h2 className="mt-3 font-display text-2xl font-semibold text-pearl">{pillar.value}</h2>
               </Reveal>
             );
           })}
@@ -89,10 +89,10 @@ export default function AboutPage() {
                     <Icon aria-hidden="true" className="h-7 w-7 text-blush" />
                     <SilkFlower className="h-4 w-4 text-rose/30 group-hover:rotate-90 transition-transform duration-500" />
                   </div>
-                  <h2 className="mt-7 font-display text-2xl font-normal italic text-pearl">{group.title}</h2>
+                  <h2 className="mt-7 font-display text-2xl font-semibold text-pearl">{group.title}</h2>
                   <ul className="mt-6 space-y-3">
                     {group.skills.map((skill) => (
-                      <li className="flex items-center gap-3 text-mist font-light" key={skill}>
+                      <li className="flex items-center gap-3 text-mist font-normal text-sm" key={skill}>
                         <SilkFlower className="h-3 w-3 text-rose/80" />
                         {skill}
                       </li>

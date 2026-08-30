@@ -23,8 +23,8 @@ const config: Config = {
         signal: "rgb(226, 180, 189)"
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["var(--font-playfair)", "Georgia", "serif"]
+        sans: ["var(--font-sans)", "Plus Jakarta Sans", "Inter", "sans-serif"],
+        display: ["var(--font-display)", "Space Grotesk", "sans-serif"]
       },
       boxShadow: {
         glow: "0 0 60px rgba(226, 180, 189, 0.22)",

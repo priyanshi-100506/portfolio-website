@@ -33,7 +33,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               <SilkFlower className="h-3.5 w-3.5 text-rose" />
               Project 0{index + 1}
             </p>
-            <h2 className="mt-3 font-display text-2xl font-normal italic text-pearl sm:text-3xl">{project.title}</h2>
+            <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-pearl sm:text-3xl">{project.title}</h2>
           </div>
           <div className="mt-1 flex items-center gap-3">
             {project.github && (

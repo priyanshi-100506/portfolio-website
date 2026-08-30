@@ -30,11 +30,11 @@ export default function HomePage() {
               <Sparkles aria-hidden="true" className="h-3.5 w-3.5 text-blush animate-pulse" />
               Backend · APIs · Applied AI
             </p>
-            <h1 className="text-balance font-display text-5xl font-normal italic leading-[1.05] text-pearl sm:text-6xl lg:text-8xl">
+            <h1 className="text-balance font-display text-5xl font-semibold tracking-tight leading-[0.98] text-pearl sm:text-6xl lg:text-8xl">
               Engineering Reliable Systems. <br className="hidden sm:inline" />
-              <span className="not-italic font-semibold">Applying AI Where It Counts.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pearl via-blush to-rose">Applying AI Where It Counts.</span>
             </h1>
-            <p className="mt-8 max-w-3xl text-lg leading-8 text-mist sm:text-xl font-light">
+            <p className="mt-8 max-w-3xl text-lg leading-8 text-mist sm:text-xl font-normal">
               Priyanshi Shah is a Computer Science & Business Systems student building backend services, REST APIs, and LLM-integrated systems with Python, FastAPI, and PostgreSQL.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
@@ -54,7 +54,7 @@ export default function HomePage() {
       <Container as="section" className="py-24 sm:py-32">
         <Reveal className="mx-auto max-w-5xl text-center">
           <Heart aria-hidden="true" className="mx-auto mb-8 h-8 w-8 text-rose fill-rose/20" />
-          <blockquote className="text-balance font-display text-3xl font-normal italic leading-relaxed text-pearl sm:text-5xl">
+          <blockquote className="text-balance font-display text-3xl font-semibold leading-snug tracking-tight text-pearl sm:text-5xl">
             “Reliable systems come first — AI is a tool I use to make them smarter, not a substitute for engineering judgment.”
           </blockquote>
         </Reveal>
@@ -82,8 +82,8 @@ export default function HomePage() {
                   <Icon aria-hidden="true" className="h-7 w-7 text-blush" />
                   <SilkFlower className="h-4 w-4 text-rose/30 transition-transform duration-500 group-hover:rotate-90 group-hover:text-rose/80" />
                 </div>
-                <h3 className="mt-8 font-display text-2xl font-normal italic text-pearl">{capability.title}</h3>
-                <p className="mt-4 leading-7 text-mist font-light">{capability.description}</p>
+                <h3 className="mt-8 font-display text-2xl font-semibold text-pearl">{capability.title}</h3>
+                <p className="mt-4 leading-7 text-mist font-normal">{capability.description}</p>
               </Reveal>
             );
           })}
@@ -105,7 +105,7 @@ export default function HomePage() {
                   <Icon aria-hidden="true" className="h-6 w-6 text-blush" />
                   <SilkFlower className="h-3.5 w-3.5 text-rose/30 group-hover:rotate-45 transition-transform duration-500" />
                 </div>
-                <p className="mt-8 font-display text-4xl font-normal italic text-pearl">{metric.value}</p>
+                <p className="mt-8 font-display text-4xl font-semibold text-pearl">{metric.value}</p>
                 <p className="mt-2 text-xs uppercase tracking-[0.2em] text-mist/90">{metric.label}</p>
                 {metric.subtext && (
                   <p className="mt-2 text-xs text-mist/60 font-light">{metric.subtext}</p>
@@ -122,7 +122,7 @@ export default function HomePage() {
             <SilkFlower size={36} className="text-rose animate-spin-slow" />
             <span className="text-sm font-semibold uppercase tracking-[0.24em] text-mist">Engineering & Reliability</span>
           </div>
-          <p className="mt-6 md:mt-0 text-balance font-display text-2xl font-normal italic leading-relaxed text-pearl sm:text-3xl">
+          <p className="mt-6 md:mt-0 text-balance font-display text-2xl font-semibold leading-snug text-pearl sm:text-3xl">
             Built for backend systems that hold up under real use — and AI features that are held to the same standard.
           </p>
         </div>

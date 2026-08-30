@@ -21,11 +21,11 @@ export default function ContactPage() {
               <SilkFlower className="h-3.5 w-3.5 text-rose animate-spin-slow" />
               Contact
             </p>
-            <h1 className="font-display text-5xl font-normal italic leading-none text-pearl sm:text-7xl lg:text-8xl">
+            <h1 className="font-display text-5xl font-semibold tracking-tight leading-none text-pearl sm:text-7xl lg:text-8xl">
               Let&apos;s build <br className="hidden sm:inline" />
-              <span className="not-italic font-semibold">something reliable.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pearl via-blush to-rose">something reliable.</span>
             </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-mist sm:text-xl font-light">
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-mist sm:text-xl font-normal">
               Currently seeking Backend Engineering and Applied AI internships — building systems that combine solid engineering with practical AI integration.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">

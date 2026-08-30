@@ -13,8 +13,8 @@ export function SectionHeading({ eyebrow, title, copy }: SectionHeadingProps) {
         <SilkFlower className="h-3.5 w-3.5 text-rose animate-spin-slow" />
         {eyebrow}
       </p>
-      <h2 className="font-display text-3xl font-normal italic leading-tight text-pearl sm:text-4xl lg:text-5xl">{title}</h2>
-      {copy ? <p className="mt-5 text-base leading-8 text-mist sm:text-lg font-light">{copy}</p> : null}
+      <h2 className="font-display text-3xl font-semibold tracking-tight leading-tight text-pearl sm:text-4xl lg:text-5xl">{title}</h2>
+      {copy ? <p className="mt-5 text-base leading-8 text-mist sm:text-lg font-normal">{copy}</p> : null}
     </div>
   );
 }
