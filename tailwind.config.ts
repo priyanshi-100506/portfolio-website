@@ -9,23 +9,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#06070a",
-        graphite: "#10131a",
-        panel: "#151923",
-        line: "rgba(255,255,255,0.12)",
-        mist: "#c9d2dc",
-        pearl: "#f4f7fb",
-        cyan: "#64e4ff",
-        iris: "#a78bfa",
-        brass: "#d7b46a",
-        signal: "#7df9c2"
+        ink: "#120a0d",
+        graphite: "#1c1216",
+        panel: "#26191f",
+        line: "rgba(226, 180, 189, 0.2)",
+        mist: "#d8c4c8",
+        pearl: "rgb(255, 245, 245)",
+        blush: "rgb(247, 214, 208)",
+        rose: "rgb(226, 180, 189)",
+        cyan: "rgb(247, 214, 208)",
+        iris: "rgb(226, 180, 189)",
+        brass: "rgb(247, 214, 208)",
+        signal: "rgb(226, 180, 189)"
       },
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
         display: ["Space Grotesk", "Inter", "ui-sans-serif", "system-ui", "sans-serif"]
       },
       boxShadow: {
-        glow: "0 0 60px rgba(100, 228, 255, 0.12)"
+        glow: "0 0 60px rgba(226, 180, 189, 0.18)"
       }
     }
   },
