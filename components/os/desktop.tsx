@@ -130,8 +130,8 @@ function DesktopInner() {
 
       {/* Brand watermark - Centered and glowing */}
       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none -z-10" aria-hidden="true">
-        <p className="font-vt323 text-7xl sm:text-9xl text-[#ffb6c1]/40 tracking-[0.2em] mix-blend-screen"
-           style={{ textShadow: "0 0 20px rgba(255, 182, 193, 0.8), 0 0 60px rgba(255, 182, 193, 0.5)" }}>
+        <p className="font-vt323 text-7xl sm:text-9xl text-white/30 font-bold tracking-[0.2em] mix-blend-screen"
+           style={{ textShadow: "0 0 20px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.5)" }}>
           PRIYANSHI SHAH
         </p>
       </div>
