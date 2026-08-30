@@ -1,10 +1,20 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
-import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
+import { JetBrains_Mono, Plus_Jakarta_Sans, Space_Grotesk, VT323 } from "next/font/google";
 import { siteConfig } from "@/lib/portfolio-data";
 import "./globals.css";
+
+const vt323 = VT323({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-vt323",
+  display: "swap"
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap"
+});
 
 const sans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -42,13 +52,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sans.variable} ${display.variable}`}>
-      <body className="font-sans antialiased">
-        <SmoothScrollProvider />
-        <div className="noise" aria-hidden="true" />
-        <SiteHeader />
+    <html lang="en" className={`${vt323.variable} ${jetbrainsMono.variable} ${sans.variable} ${display.variable}`}>
+      <body className="font-mono antialiased bg-[#12060f] text-[#f5e9f0]">
         {children}
-        <SiteFooter />
       </body>
     </html>
   );
