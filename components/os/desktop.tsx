@@ -9,6 +9,8 @@ import { Taskbar } from "./taskbar";
 import { StartMenu } from "./start-menu";
 import { ContextMenu, AboutOSModal } from "./context-menu";
 import { Screensaver, useIdleScreensaver } from "./screensaver";
+import { MusicPlayerWidget } from "./music-player";
+import { StickyNoteWidget } from "./sticky-note";
 import { WindowId } from "./types";
 import { isSoundEnabled, setSoundEnabled, useSoundEnabled } from "./sound-manager";
 
@@ -127,11 +129,17 @@ function DesktopInner() {
         );
       })}
 
-      {/* Brand watermark */}
-      <div className="absolute bottom-[52px] right-4 text-right pointer-events-none" aria-hidden="true">
-        <p className="font-vt323 text-2xl text-[#ff4fa3]/20 tracking-widest">PRIYANSHI_OS</p>
-        <p className="font-vt323 text-xs text-[#ff4fa3]/15 tracking-wider">v1.0 · ALL SYSTEMS GO</p>
+      {/* Brand watermark - Centered and glowing */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none -z-10" aria-hidden="true">
+        <p className="font-vt323 text-7xl sm:text-9xl text-[#ff4fa3]/10 tracking-[0.2em] mix-blend-screen"
+           style={{ textShadow: "0 0 40px rgba(255, 79, 163, 0.4), 0 0 80px rgba(255, 79, 163, 0.2)" }}>
+          PRIYANSHI_OS
+        </p>
       </div>
+
+      {/* Widgets */}
+      <MusicPlayerWidget />
+      <StickyNoteWidget />
 
       {/* Open Windows */}
       {Object.values(windows)
