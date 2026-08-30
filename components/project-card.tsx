@@ -1,4 +1,4 @@
-import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
+import { ArrowUpRight, GitBranch, ExternalLink } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 
 type ProjectCardProps = {
@@ -38,7 +38,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <Github className="h-5 w-5" />
+                <GitBranch className="h-5 w-5" />
               </a>
             )}
             {project.liveDemo && (
@@ -94,7 +94,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <Github className="h-3 w-3" />
+                <GitBranch className="h-3 w-3" />
                 GitHub
               </a>
             )}
