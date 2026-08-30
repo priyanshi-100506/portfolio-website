@@ -18,7 +18,7 @@ const DESKTOP_ICONS: { id: WindowId; label: string; iconType: "folder" | "file" 
 
 function DesktopInner() {
   const { windows, closeStartMenu, openWindow } = useWindowManager();
-  const [iconPositions, setIconPositions] = useState<Record<string, { x: number; y: number }>>({});
+  const [iconPositions, setIconPositions] = useState<Partial<Record<WindowId, { x: number; y: number }>>>({});
 
   // Scatter icons randomly on first mount
   useEffect(() => {
