@@ -18,67 +18,11 @@ const DESKTOP_ICONS: { id: WindowId; label: string; iconType: "folder" | "file" 
   { id: "contact",  label: "Contact",    iconType: "terminal" },
   { id: "resume",   label: "Resume.pdf", iconType: "file" }
 ];
-
 const ICON_W  = 96;
 const ICON_H  = 104;
 const TASKBAR = 52;
-const DRAG_THRESHOLD = 5;
 
-interface IconPos { x: number; y: number }
-
-// ── Draggable icon wrapper ───────────────────────────────────────────────────
-function DraggableIconWrapper({
-  icon, pos, onMove,
-}: {
-  icon: typeof DESKTOP_ICONS[number];
-  pos: IconPos;
-  onMove: (id: WindowId, pos: IconPos) => void;
-}) {
-  const drag = useRef({ active: false, moved: false, sx: 0, sy: 0, px: 0, py: 0 });
-
-  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (e.button !== 0) return;
-    e.currentTarget.setPointerCapture(e.pointerId);
-    drag.current = { active: true, moved: false, sx: e.clientX, sy: e.clientY, px: pos.x, py: pos.y };
-  };
-
-  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!drag.current.active) return;
-    const dx = e.clientX - drag.current.sx;
-    const dy = e.clientY - drag.current.sy;
-    if (!drag.current.moved && (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD)) {
-      drag.current.moved = true;
-    }
-    if (drag.current.moved) {
-      onMove(icon.id, {
-        x: Math.max(0, Math.min(window.innerWidth  - ICON_W, drag.current.px + dx)),
-        y: Math.max(0, Math.min(window.innerHeight - TASKBAR - ICON_H, drag.current.py + dy)),
-      });
-    }
-  };
-
-  const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
-    try { e.currentTarget.releasePointerCapture(e.pointerId); } catch { /**/ }
-    drag.current.active = false;
-  };
-
-  const onClickCapture = (e: React.MouseEvent) => {
-    if (drag.current.moved) { e.stopPropagation(); drag.current.moved = false; }
-  };
-
-  return (
-    <div
-      style={{ position: "absolute", left: pos.x, top: pos.y, zIndex: 10, touchAction: "none" }}
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      onPointerCancel={onPointerUp}
-      onClickCapture={onClickCapture}
-    >
-      <DesktopIcon {...icon} />
-    </div>
-  );
-}
+export interface IconPos { x: number; y: number }
 
 // ── Main desktop surface ─────────────────────────────────────────────────────
 function DesktopInner() {
@@ -179,7 +123,7 @@ function DesktopInner() {
         const pos = iconPositions[icon.id];
         if (!pos) return null;
         return (
-          <DraggableIconWrapper key={icon.id} icon={icon} pos={pos} onMove={handleIconMove} />
+          <DesktopIcon key={icon.id} {...icon} pos={pos} onMove={handleIconMove} />
         );
       })}
 
