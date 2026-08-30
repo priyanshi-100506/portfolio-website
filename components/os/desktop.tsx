@@ -10,18 +10,16 @@ import { StartMenu } from "./start-menu";
 import { WindowId } from "./types";
 
 const DESKTOP_ICONS: { id: WindowId; label: string; iconType: "folder" | "file" | "terminal" }[] = [
-  { id: "about", label: "About_Me", iconType: "file" },
-  { id: "projects", label: "Projects", iconType: "folder" },
-  { id: "contact", label: "Contact", iconType: "terminal" },
-  { id: "resume", label: "Resume.pdf", iconType: "file" }
+  { id: "about",    label: "About_Me",   iconType: "file" },
+  { id: "projects", label: "Projects",   iconType: "folder" },
+  { id: "contact",  label: "Contact",    iconType: "terminal" },
+  { id: "resume",   label: "Resume.pdf", iconType: "file" }
 ];
 
 function DesktopInner() {
   const { windows, closeStartMenu, openWindow } = useWindowManager();
 
-  const handleDesktopClick = () => closeStartMenu();
-
-  // Auto-open About_Me 2.5s after desktop appears
+  // Auto-open About_Me 2.5s after boot
   useEffect(() => {
     const t = setTimeout(() => openWindow("about"), 2500);
     return () => clearTimeout(t);
@@ -29,35 +27,55 @@ function DesktopInner() {
 
   return (
     <div
-      className="fixed inset-0 overflow-hidden select-none"
-      style={{ background: "radial-gradient(ellipse at 30% 20%, #2a0820 0%, #12060f 60%)" }}
-      onClick={handleDesktopClick}
+      className="fixed inset-0 overflow-hidden"
+      onClick={closeStartMenu}
     >
-      {/* CRT scanlines overlay */}
+      {/* ── Background video ── */}
+      <video
+        aria-hidden="true"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
+      >
+        <source src="/media/intelligence-field.mp4" type="video/mp4" />
+      </video>
+
+      {/* Dark plum overlay so video doesn't overpower the OS */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at 30% 20%, rgba(42,8,32,0.85) 0%, rgba(18,6,15,0.92) 70%)" }}
+      />
+
+      {/* CRT scanlines + vignette */}
       <div className="crt-scanlines" aria-hidden="true" />
-      <div className="crt-vignette" aria-hidden="true" />
+      <div className="crt-vignette"  aria-hidden="true" />
 
-      {/* Desktop Icons */}
-      <div className="absolute top-6 left-4 flex flex-col gap-2 z-10" role="list" aria-label="Desktop icons">
+      {/* Desktop icons — left column */}
+      <nav
+        aria-label="Desktop icons"
+        className="absolute top-6 left-4 flex flex-col gap-1 z-10"
+      >
         {DESKTOP_ICONS.map((icon) => (
-          <div key={icon.id} role="listitem">
-            <DesktopIcon {...icon} />
-          </div>
+          <DesktopIcon key={icon.id} {...icon} />
         ))}
-      </div>
+      </nav>
 
-      {/* Desktop brand watermark */}
+      {/* Brand watermark bottom-right */}
       <div className="absolute bottom-[52px] right-4 text-right pointer-events-none" aria-hidden="true">
-        <p className="font-vt323 text-2xl text-[#ff4fa3]/20 tracking-widest">PRIYANSHI_OS</p>
-        <p className="font-vt323 text-xs text-[#ff4fa3]/15 tracking-wider">v1.0 · ALL SYSTEMS GO</p>
+        <p className="font-vt323 text-2xl text-[#ff4fa3]/18 tracking-widest">PRIYANSHI_OS</p>
+        <p className="font-vt323 text-xs text-[#ff4fa3]/12 tracking-wider">v1.0 · ALL SYSTEMS GO</p>
       </div>
 
-      {/* Open Windows */}
-      {Object.values(windows).map((w) =>
-        w.isOpen ? <Window key={w.id} windowState={w} /> : null
-      )}
+      {/* Open Windows (rendered in z-index order) */}
+      {Object.values(windows)
+        .sort((a, b) => a.zIndex - b.zIndex)
+        .map((w) => w.isOpen ? <Window key={w.id} windowState={w} /> : null)}
 
-      {/* Start Menu */}
+      {/* Start Menu (above taskbar) */}
       <StartMenu />
 
       {/* Taskbar */}
@@ -68,7 +86,6 @@ function DesktopInner() {
 
 export function Desktop() {
   const [booted, setBooted] = useState(false);
-
   const handleBootComplete = useCallback(() => setBooted(true), []);
 
   return (

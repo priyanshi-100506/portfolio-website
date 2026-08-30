@@ -16,9 +16,12 @@ export interface WindowState {
   filename: string;
   isOpen: boolean;
   isMinimized: boolean;
+  isMaximized: boolean;
   zIndex: number;
   position: Position;
   size: Size;
+  savedPosition?: Position;
+  savedSize?: Size;
 }
 
 export interface DesktopIconItem {
